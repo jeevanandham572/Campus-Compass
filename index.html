@@ -1,184 +1,102 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<title>Quiz — Mobile</title>
+<title>Quiz — Gen Z Mobile</title>
+<!-- Gen Z font stack (variable) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Outfit:wght@300..700&family=Manrope:wght@300..800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#f7f9fc; --card:#fff; --ink:#0f172a; --muted:#64748b; --line:#e2e8f0;
-    --brand:#2563eb; --brand2:#7c3aed; --ok:#10b981; --bad:#ef4444;
-    --opt:#f8fafc; --opt-hover:#eff6ff;
+    --bg:#0b1020; /* dark default for punchy vibe */
+    --card:#0f172a; --ink:#e5e7eb; --muted:#93a4ba; --line:#1f2a44;
+    --brand:#7c3aed; --brand2:#22d3ee; --ok:#10b981; --bad:#ef4444;
+    --opt:#0b1326; --opt-hover:#111c34;
+    --ring: 0 0 0 3px rgba(124,58,237,.25);
+    --font-sans: "Space Grotesk","Outfit","Manrope",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
   }
-  @media (prefers-color-scheme: dark){
-    :root{
-      --bg:#0b1020; --card:#0f172a; --ink:#e5e7eb; --muted:#93a4ba; --line:#1f2a44;
-      --opt:#0b1326; --opt-hover:#111c34;
-    }
+  @media (prefers-color-scheme: light){
+    :root{ --bg:#f7f9fc; --card:#fff; --ink:#0f172a; --muted:#64748b; --line:#e2e8f0; --opt:#f8fafc; --opt-hover:#eff6ff; }
   }
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
-    margin:0; font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,Arial,sans-serif;
-    background:var(--bg); color:var(--ink);
+    margin:0; font-family:var(--font-sans); color:var(--ink); background:
+      radial-gradient(1200px 800px at 10% -10%, rgba(124,58,237,.25), transparent 60%),
+      radial-gradient(1200px 800px at 110% 10%, rgba(34,211,238,.18), transparent 55%),
+      var(--bg);
   }
+  .safe{padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}/* Header */ header{position:sticky;top:0;z-index:40;backdrop-filter:blur(10px) saturate(160%); background:linear-gradient(90deg,rgba(124,58,237,.20),rgba(34,211,238,.15)); border-bottom:1px solid var(--line)} .head{max-width:920px;margin:0 auto;padding:12px 0;display:flex;align-items:center;justify-content:space-between;gap:10px} .brand{display:flex;gap:10px;align-items:center} .logo{width:28px;height:28px;border-radius:8px;background:conic-gradient(from 220deg,#22d3ee,#3b82f6,#7c3aed);box-shadow:inset 0 0 0 1px rgba(255,255,255,.25)} h1{font-size:18px;line-height:1;margin:0;font-weight:800;letter-spacing:.2px} .chips{display:flex;gap:6px;align-items:center} .chip{font-size:11px;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.08);color:var(--ink);border:1px solid var(--line)} @media (max-width:420px){.chips{display:none}}
 
-  /* Safe-area padding for notches */
-  .safe { padding-left: max(16px, env(safe-area-inset-left));
-          padding-right:max(16px, env(safe-area-inset-right)); }
+main{max-width:920px;margin:14px auto 92px} .card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 10px 30px rgba(2,12,27,.25);padding:14px} .screen{display:none}.screen.active{display:block}
 
-  header{
-    position:sticky; top:0; z-index:30;
-    backdrop-filter:blur(8px) saturate(150%);
-    background:linear-gradient(90deg,#e0f2fe, #e9d5ff);
-    border-bottom:1px solid #dbeafe;
-  }
-  .head safe, .head { display:flex; align-items:center; justify-content:space-between }
-  .head{ max-width:920px; margin:0 auto; padding:12px 0 }
-  .title{ display:flex; gap:10px; align-items:center }
-  .logo{ width:28px;height:28px;border-radius:8px;background:conic-gradient(from 210deg,#22d3ee,#3b82f6,#7c3aed); }
-  h1{ font-size:16px; margin:0 }
-  .chips{ display:flex; gap:6px; align-items:center }
-  .chip{ font-size:11px; padding:6px 10px; border-radius:999px; background:#eef2ff; color:#334155; border:1px solid #c7d2fe }
-  @media (max-width:420px){ .chips{ display:none } }
+/* Meta */ .meta{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;margin-bottom:10px} .badges{display:flex;gap:6px;align-items:center;flex-wrap:wrap} .badge{font-size:12px;padding:6px 8px;border-radius:10px;border:1px solid var(--line);color:var(--muted);background:rgba(255,255,255,.02)} .pct{font-size:12px;color:var(--muted);text-align:right} .progress{height:10px;background:#13203a;border-radius:999px;overflow:hidden} @media (prefers-color-scheme: light){.progress{background:#e6edf7}} .bar{height:100%;width:0;background:linear-gradient(90deg,var(--brand),#3b82f6 50%,var(--brand2))}
 
-  main{ max-width:920px; margin:14px auto 92px; } /* space for sticky footer */
-  .card{
-    background:var(--card); border:1px solid var(--line); border-radius:14px;
-    box-shadow:0 8px 24px rgba(2,12,27,.05); padding:14px;
-  }
-  .screen{ display:none } .screen.active{ display:block }
+/* Question */ .q{font-size:20px;line-height:1.35;font-weight:800;margin:8px 0 6px} .sub{color:var(--muted);font-size:13px;margin-bottom:6px}
 
-  /* Meta row */
-  .meta{ display:grid; grid-template-columns:1fr auto; gap:10px; align-items:center; margin-bottom:10px }
-  .badges{ display:flex; gap:6px; align-items:center; flex-wrap:wrap }
-  .badge{ font-size:12px; padding:6px 8px; border-radius:8px; border:1px solid var(--line); color:var(--muted) }
-  .progress{ height:10px; background:#e6edf7; border-radius:999px; overflow:hidden }
-  .bar{ height:100%; width:0; background:linear-gradient(90deg,#22d3ee,#3b82f6 50%,#7c3aed) }
-  .pct{ font-size:12px; color:var(--muted); text-align:right }
+/* Options */ .options{display:grid;gap:10px;margin:12px 0} @media (min-width:640px){.options{grid-template-columns:1fr 1fr}} .opt{background:var(--opt);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;gap:12px;align-items:flex-start;min-height:60px;font-size:16px;line-height:1.35;text-align:left;cursor:pointer;transition:background .12s,transform .04s,box-shadow .12s;outline:none} .opt:hover{background:var(--opt-hover)} .opt:active{transform:scale(.996)} .opt:focus-visible{box-shadow:var(--ring)} .key{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-weight:900;background:#1f2a44;color:#e5e7eb} @media (prefers-color-scheme: light){.key{background:#e2e8f0;color:#111827}} .opt.correct{background:rgba(16,185,129,.12);border-color:#34d399} .opt.wrong{background:rgba(239,68,68,.12);border-color:#fca5a5} .opt.correct .key{background:#34d399} .opt.wrong .key{background:#f87171} .opt.disabled{opacity:.96;pointer-events:none}
 
-  /* Question */
-  .q{ font-size:18px; line-height:1.35; font-weight:700; margin:8px 0 6px }
-  .sub{ color:var(--muted); font-size:13px; margin-bottom:6px }
+.exp{display:none;margin-top:10px;border:1px dashed var(--line);border-radius:14px;padding:12px;background:rgba(255,255,255,.03)} .exp h3{margin:0 0 6px;font-size:14px;font-weight:800} .exp p{margin:0;font-size:15px;white-space:pre-wrap}
 
-  /* Options: mobile-first single column */
-  .options{ display:grid; gap:10px; margin:12px 0 }
-  @media (min-width:640px){ .options{ grid-template-columns:1fr 1fr } } /* becomes 2 cols on wider */
-  .opt{
-    background:var(--opt); border:1px solid var(--line); border-radius:12px;
-    padding:14px; display:flex; gap:10px; align-items:flex-start; min-height:56px;
-    font-size:16px; line-height:1.35; text-align:left; cursor:pointer;
-    -webkit-tap-highlight-color: transparent; transition:background .12s, transform .04s;
-  }
-  .opt:hover{ background:var(--opt-hover) }
-  .opt:active{ transform:scale(.996) }
-  .key{ width:28px; height:28px; border-radius:8px; display:grid; place-items:center; font-weight:800; background:#e2e8f0; color:#111827 }
-  @media (prefers-color-scheme: dark){ .key{ background:#1f2a44; color:#e5e7eb } }
-  .opt.correct{ background:#ecfdf5; border-color:#bbf7d0 }
-  .opt.wrong{ background:#fef2f2; border-color:#fecaca }
-  .opt.correct .key{ background:#bbf7d0 }
-  .opt.wrong .key{ background:#fecaca }
-  .opt.disabled{ opacity:.95; pointer-events:none }
+/* Controls */ .controls{position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(11,16,32,.88);border-top:1px solid var(--line);backdrop-filter:blur(12px)} @media (prefers-color-scheme: light){.controls{background:rgba(255,255,255,.92)}} .controls .inner{max-width:920px;margin:0 auto;padding:10px 0} .row{display:flex;gap:10px;align-items:center;justify-content:space-between} .safeRow{padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))} button{font:inherit;padding:14px 16px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--ink);min-width:44px;min-height:44px;cursor:pointer;letter-spacing:.2px} .primary{background:linear-gradient(90deg,var(--brand),var(--brand2));border:1px solid rgba(124,58,237,.6);color:#fff;font-weight:900} .ghost{background:transparent} button:disabled{opacity:.55;cursor:not-allowed}
 
-  /* Explanation as a mobile-friendly panel */
-  .exp{
-    display:none; margin-top:10px; border:1px dashed var(--line); border-radius:12px; padding:12px;
-    background:rgba(2,12,27,.03);
-  }
-  .exp h3{ margin:0 0 6px; font-size:14px }
-  .exp p{ margin:0; font-size:15px; white-space:pre-wrap }
+.toast{position:fixed;top:10px;left:50%;transform:translateX(-50%);background:#111827;color:#fff;padding:8px 12px;border-radius:999px;font-size:13px;opacity:0;transition:opacity .2s,transform .2s} .toast.show{opacity:1;transform:translateX(-50%) translateY(4px)}
 
-  /* Sticky bottom controls: big tap targets */
-  .controls{
-    position:fixed; left:0; right:0; bottom:0; z-index:40;
-    background:rgba(255,255,255,.92); border-top:1px solid var(--line); backdrop-filter:blur(10px);
-  }
-  @media (prefers-color-scheme: dark){
-    .controls{ background:rgba(11,16,32,.9) }
-  }
-  .controls .inner{ max-width:920px; margin:0 auto; padding:10px 0 }
-  .row{ display:flex; gap:10px; align-items:center; justify-content:space-between }
-  .safeRow{ padding-left:max(16px, env(safe-area-inset-left)); padding-right:max(16px, env(safe-area-inset-right)); }
-  button{
-    font:inherit; padding:14px 16px; border-radius:12px; border:1px solid var(--line); background:var(--card); color:var(--ink);
-    min-width:44px; min-height:44px; cursor:pointer;
-  }
-  .primary{
-    background:linear-gradient(90deg,var(--brand),var(--brand2)); border:1px solid #1d4ed8; color:#fff;
-    font-weight:700; letter-spacing:.2px;
-  }
-  .ghost{ background:transparent }
-  button:disabled{ opacity:.55; cursor:not-allowed }
+/* Reduce motion */ @media (prefers-reduced-motion: reduce){.opt:active{transform:none}.toast{transition:none}} </style>
 
-  /* Small toast */
-  .toast{ position:fixed; top:10px; left:50%; transform:translateX(-50%); background:#111827; color:#fff;
-          padding:8px 12px; border-radius:999px; font-size:13px; opacity:0; transition:opacity .2s, transform .2s }
-  .toast.show{ opacity:1; transform:translateX(-50%) translateY(4px) }
-
-  /* Reduce motion */
-  @media (prefers-reduced-motion: reduce){
-    .opt:active{ transform:none }
-    .toast{ transition:none }
-  }
-</style>
 </head>
 <body>
   <header>
     <div class="head safe">
-      <div class="title"><div class="logo" aria-hidden="true"></div><h1>My Quiz</h1></div>
+      <div class="brand"><div class="logo" aria-hidden="true"></div><h1>My Quiz</h1></div>
       <div class="chips">
         <span class="chip">A/B/C/D</span>
         <span class="chip">Enter/→ Next</span>
         <span class="chip">← Prev</span>
       </div>
     </div>
-  </header>
-
-  <main class="safe">
+  </header>  <main class="safe">
     <!-- Intro -->
     <section id="intro" class="card screen active" aria-live="polite">
-      <div style="font-weight:700;margin-bottom:6px">Loading questions…</div>
-      <div style="color:var(--muted);font-size:14px">Place your JSON next to this file and make sure <code>QUESTIONS_URL</code> points to it.</div>
-    </section>
+      <div style="font-weight:800;margin-bottom:6px">Loading questions…</div>
+      <div style="color:var(--muted);font-size:14px">Place your JSON next to this file and ensure <code>QUESTIONS_URL</code> points to it.</div>
+    </section><!-- Quiz -->
+<section id="quiz" class="card screen" aria-labelledby="qLabel">
+  <div class="meta">
+    <div class="badges">
+      <span id="metaIdx" class="badge">Q 1/1</span>
+      <span id="metaScore" class="badge">Score 0</span>
+      <span id="metaTime" class="badge">00:00</span>
+    </div>
+    <div class="pct" id="pct">0%</div>
+  </div>
+  <div class="progress" aria-hidden="true"><div id="bar" class="bar"></div></div>
 
-    <!-- Quiz -->
-    <section id="quiz" class="card screen" aria-labelledby="qLabel">
-      <div class="meta">
-        <div class="badges">
-          <span id="metaIdx" class="badge">Q 1/1</span>
-          <span id="metaScore" class="badge">Score 0</span>
-          <span id="metaTime" class="badge">00:00</span>
-        </div>
-        <div class="pct" id="pct">0%</div>
-      </div>
-      <div class="progress" aria-hidden="true"><div id="bar" class="bar"></div></div>
+  <h2 id="qLabel" class="q">—</h2>
+  <div id="qSub" class="sub"></div>
 
-      <h2 id="qLabel" class="q">—</h2>
-      <div id="qSub" class="sub"></div>
+  <div id="optBox" class="options" role="group" aria-label="Options"></div>
 
-      <div id="optBox" class="options" role="group" aria-label="Options"></div>
+  <div id="exp" class="exp" aria-live="polite" aria-atomic="true">
+    <h3>Explanation</h3>
+    <p id="expText"></p>
+  </div>
+</section>
 
-      <div id="exp" class="exp" aria-live="polite" aria-atomic="true">
-        <h3>Explanation</h3>
-        <p id="expText"></p>
-      </div>
-    </section>
+<!-- Result -->
+<section id="done" class="card screen">
+  <div style="text-align:center;padding:16px 6px">
+    <div style="color:var(--muted);font-size:14px">Finished</div>
+    <div id="finalScore" style="font-size:34px;font-weight:900;margin:6px 0">—</div>
+    <div id="finalMeta" style="color:var(--muted);font-size:14px">—</div>
+    <div style="margin-top:12px;display:flex;gap:10px;justify-content:center">
+      <button id="restart2" class="primary">Restart</button>
+    </div>
+  </div>
+</section>
 
-    <!-- Result -->
-    <section id="done" class="card screen">
-      <div style="text-align:center;padding:16px 6px">
-        <div style="color:var(--muted);font-size:14px">Finished</div>
-        <div id="finalScore" style="font-size:32px;font-weight:800;margin:6px 0">—</div>
-        <div id="finalMeta" style="color:var(--muted);font-size:14px">—</div>
-        <div style="margin-top:12px;display:flex;gap:10px;justify-content:center">
-          <button id="restart2" class="primary">Restart</button>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Sticky controls -->
-  <nav class="controls">
+  </main>  <!-- Sticky controls -->  <nav class="controls">
     <div class="inner">
       <div class="row safeRow">
         <button id="prevBtn" class="ghost">◀ Prev</button>
@@ -188,15 +106,11 @@
         </div>
       </div>
     </div>
-  </nav>
-
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
-
-<script>
-/* ========= CONFIG ========= */
+  </nav>  <div id="toast" class="toast" role="status" aria-live="polite"></div><script>
+/******** CONFIG ********/ 
 const QUESTIONS_URL = 'quiz_questions_from_pdf.json';
 
-/* ========= DOM ========= */
+/******** DOM ********/
 const $ = s => document.querySelector(s);
 const intro = $('#intro'), quiz = $('#quiz'), done = $('#done');
 const metaIdx = $('#metaIdx'), metaScore = $('#metaScore'), metaTime = $('#metaTime');
@@ -206,12 +120,12 @@ const exp = $('#exp'), expText = $('#expText');
 const prevBtn = $('#prevBtn'), nextBtn = $('#nextBtn'), restartBtn = $('#restartBtn'), restart2 = $('#restart2');
 const toast = $('#toast');
 
-/* ========= STATE ========= */
+/******** STATE ********/
 let BANK = [];
 let i = 0, score = 0;
 let startedAt = 0, ticker = null;
 
-/* ========= LOAD ========= */
+/******** LOAD ********/
 (async function boot(){
   try{
     const res = await fetch(QUESTIONS_URL, {cache:'no-store'});
@@ -222,7 +136,7 @@ let startedAt = 0, ticker = null;
     show(quiz); render();
   }catch(err){
     intro.innerHTML = `
-      <div style="color:#b91c1c;font-weight:700;margin-bottom:6px">Failed to load ${escapeHTML(QUESTIONS_URL)}</div>
+      <div style="color:#f87171;font-weight:800;margin-bottom:6px">Failed to load ${escapeHTML(QUESTIONS_URL)}</div>
       <div style="color:var(--muted)">Reason: ${escapeHTML(err.message||String(err))}</div>
     `;
   }
@@ -240,11 +154,10 @@ function normalize(x, idx){
   const answerKey = String(x.answerKey ?? '').trim().toUpperCase();
   const explanation = String(x.explanation ?? '').trim();
   const correctIndex = options.findIndex(o => o.key.toUpperCase()===answerKey);
-  return { id:x.id ?? idx+1, question:q, subtitle:String(x.subtitle??'').trim(),
-           options, answerKey, correctIndex, explanation, userChoice:null, evaluated:false };
+  return { id:x.id ?? idx+1, question:q, subtitle:String(x.subtitle??'').trim(), options, answerKey, correctIndex, explanation, userChoice:null, evaluated:false };
 }
 
-/* ========= RENDER ========= */
+/******** RENDER ********/
 function render(){
   const total = BANK.length;
   if(!total){ qLabel.textContent='No questions found.'; optBox.innerHTML=''; nextBtn.disabled=true; return; }
@@ -262,7 +175,7 @@ function render(){
   qLabel.textContent = q.question || '—';
   qSub.textContent = q.subtitle || '';
 
-  // Options (single column on phones)
+  // Options
   optBox.innerHTML = '';
   q.options.forEach(o=>{
     const btn = document.createElement('button');
@@ -305,7 +218,6 @@ function choose(key){
   lockOptions(true);
   showExplanation(q);
   nextBtn.disabled = false;
-  // Auto-scroll explanation into view on phones
   exp.scrollIntoView({block:'nearest', behavior:'smooth'});
 }
 
@@ -334,11 +246,8 @@ function showExplanation(q){
 }
 function hideExplanation(){ exp.style.display='none'; expText.textContent='' }
 
-/* ========= NAV ========= */
-function next(){
-  if(i < BANK.length-1){ i++; render(); }
-  else { finish(); }
-}
+/******** NAV ********/
+function next(){ if(i < BANK.length-1){ i++; render(); } else { finish(); } }
 function prev(){ if(i>0){ i--; render(); } }
 
 function finish(){
@@ -358,7 +267,7 @@ function restart(){
   show(quiz); render();
 }
 
-/* ========= UTIL ========= */
+/******** UTIL ********/
 function show(el){ [intro,quiz,done].forEach(s=>s.classList.remove('active')); el.classList.add('active'); }
 function escapeHTML(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
 function ping(msg){ toast.textContent = msg; toast.classList.add('show'); clearTimeout(ping._t); ping._t=setTimeout(()=>toast.classList.remove('show'), 900); }
@@ -370,7 +279,7 @@ function stopTimer(){ clearInterval(ticker); }
 function tick(){ const s=Math.max(0,Math.floor((Date.now()-startedAt)/1000)); metaTime.textContent = formatTime(s); }
 function formatTime(s){ const m=Math.floor(s/60), sec=s%60; return `${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`; }
 
-/* ========= EVENTS ========= */
+/******** EVENTS ********/
 nextBtn.addEventListener('click', next);
 prevBtn.addEventListener('click', prev);
 restartBtn.addEventListener('click', restart);
@@ -382,26 +291,23 @@ window.addEventListener('keydown', (e)=>{
   const q = BANK[i];
   const key = e.key.toUpperCase();
   const letters=['A','B','C','D','E','F','G','H'];
-
   if(letters.includes(key) && !q?.evaluated){
     const btn = Array.from(optBox.querySelectorAll('.opt')).find(b => (b.dataset.key||'').toUpperCase()===key);
     if(btn) btn.click();
-  }else if((e.key==='Enter'||e.key==='ArrowRight') && q?.evaluated){
-    next();
-  }else if(e.key==='ArrowLeft'){ prev(); }
+  }else if((e.key==='Enter'||e.key==='ArrowRight') && q?.evaluated){ next(); }
+  else if(e.key==='ArrowLeft'){ prev(); }
 });
 
-/* Touch swipe: left = next (if answered), right = prev */
+/* Touch swipe */
 let touchX=null, touchY=null, swiped=false;
 function touchStart(e){ const t=e.changedTouches[0]; touchX=t.clientX; touchY=t.clientY; swiped=false; }
 function touchMove(e){
   if(touchX===null) return;
   const t=e.changedTouches[0], dx=t.clientX - touchX, dy=t.clientY - touchY;
   if(Math.abs(dx)>24 && Math.abs(dy)<32 && !swiped){
-    swiped=true;
-    if(dx<-24){ // swipe left
-      const q=BANK[i]; if(q?.evaluated) next();
-    }else if(dx>24){ prev(); }
+    swiped=true; const q=BANK[i];
+    if(dx<-24){ if(q?.evaluated) next(); }
+    else if(dx>24){ prev(); }
   }
 }
 function touchEnd(){ touchX=null; touchY=null; swiped=false; }
@@ -409,6 +315,5 @@ function touchEnd(){ touchX=null; touchY=null; swiped=false; }
 document.addEventListener('touchstart', touchStart, {passive:true});
 document.addEventListener('touchmove', touchMove, {passive:true});
 document.addEventListener('touchend', touchEnd, {passive:true});
-</script>
-</body>
+</script></body>
 </html>
