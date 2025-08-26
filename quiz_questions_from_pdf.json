@@ -2364,5 +2364,1578 @@
     "answerKey": "A",
     "correctIndex": 0,
     "explanation": "Tonsillar inflammation can irritate the glossopharyngeal nerve, which also \nsupplies sensory fibres to the ear via its tympanic branch. This shared innervation explains \nreferred ear pain in tonsillitis. The vagus, accessory and hypoglossal nerves do not carry \ntonsillar sensory fibres."
+  },
+  {
+    "id": 183,
+    "question": "Which cells form the myelin sheath in the central nervous system (CNS)?",
+    "options": {
+      "A": "Oligodendrocytes",
+      "B": "Schwann cells",
+      "C": "Astrocytes",
+      "D": "Microglia"
+    },
+    "answerKey": "A",
+    "correctIndex": 0,
+    "explanation": "In the CNS, myelin is formed by oligodendrocytes. In the PNS, it is formed by Schwann cells."
+  },
+  {
+    "id": 184,
+    "question": "In multiple sclerosis (MS), which cells are primarily affected?",
+    "options": {
+      "A": "Schwann cells",
+      "B": "Oligodendrocytes",
+      "C": "Astrocytes",
+      "D": "Microglia"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "Multiple sclerosis is a demyelinating disease that damages oligodendrocytes in the CNS."
+  },
+  {
+    "id": 185,
+    "question": "At which vertebral level does the spinal cord usually end in adults?",
+    "options": {
+      "A": "T12",
+      "B": "L1 (lower border)",
+      "C": "L2 (upper border)",
+      "D": "L3"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "In adults, the spinal cord ends at the lower border of L1 vertebra. In newborns, it extends up to L3."
+  },
+  {
+    "id": 186,
+    "question": "At which vertebral level does the spinal cord usually end in newborns?",
+    "options": {
+      "A": "T12",
+      "B": "L1",
+      "C": "L2",
+      "D": "L3 (upper border)"
+    },
+    "answerKey": "D",
+    "correctIndex": 3,
+    "explanation": "In newborns, the spinal cord ends at the upper border of L3 vertebra. In adults, it ends at L1."
+  },
+  {
+    "id": 187,
+    "question": "How many pairs of spinal nerves are present in humans?",
+    "options": {
+      "A": "30",
+      "B": "31",
+      "C": "32",
+      "D": "33"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "There are 31 pairs of spinal nerves: 8 cervical, 12 thoracic, 5 lumbar, 5 sacral, and 1 coccygeal."
+  },
+  {
+    "id": 188,
+    "question": "Which spinal meninges layer is tough and forms the outer covering?",
+    "options": {
+      "A": "Pia mater",
+      "B": "Arachnoid mater",
+      "C": "Dura mater",
+      "D": "Subarachnoid space"
+    },
+    "answerKey": "C",
+    "correctIndex": 2,
+    "explanation": "The dura mater is the thick, tough outermost covering of the spinal cord and brain."
+  },
+  {
+    "id": 189,
+    "question": "Which meningeal layer is delicate and closely invests the spinal cord?",
+    "options": {
+      "A": "Pia mater",
+      "B": "Dura mater",
+      "C": "Arachnoid mater",
+      "D": "Linea splendens"
+    },
+    "answerKey": "A",
+    "correctIndex": 0,
+    "explanation": "The pia mater is the delicate innermost meningeal layer that directly covers the spinal cord."
+  },
+  {
+    "id": 190,
+    "question": "Which meningeal space contains cerebrospinal fluid (CSF)?",
+    "options": {
+      "A": "Epidural space",
+      "B": "Subdural space",
+      "C": "Subarachnoid space",
+      "D": "Pia mater"
+    },
+    "answerKey": "C",
+    "correctIndex": 2,
+    "explanation": "CSF is present in the subarachnoid space, between the arachnoid mater and pia mater."
+  },
+  {
+    "id": 191,
+    "question": "Which spinal meningeal thickening stabilises the cord laterally?",
+    "options": {
+      "A": "Linea splendens",
+      "B": "Ligamentum denticulatum",
+      "C": "Filum terminale",
+      "D": "Dura mater"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The ligamentum denticulatum is a tooth-like extension of pia mater that stabilises the spinal cord laterally."
+  },
+  {
+    "id": 192,
+    "question": "What is the thin extension of pia mater that anchors the spinal cord to the coccyx called?",
+    "options": {
+      "A": "Linea splendens",
+      "B": "Filum terminale",
+      "C": "Ligamentum denticulatum",
+      "D": "Conus medullaris"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The filum terminale is a delicate extension of pia mater that anchors the spinal cord to the coccyx."
+  },
+  {
+    "id": 193,
+    "question": "Which meningeal layer of the spinal cord is the tough outer covering?",
+    "options": {
+      "A": "Pia mater",
+      "B": "Arachnoid mater",
+      "C": "Dura mater",
+      "D": "Subarachnoid space"
+    },
+    "answerKey": "C",
+    "correctIndex": 2,
+    "explanation": "The dura mater is the outermost meningeal layer and provides a tough protective covering around the spinal cord."
+  },
+  {
+    "id": 194,
+    "question": "Which spinal meningeal layer is thin, web-like and non-vascular?",
+    "options": {
+      "A": "Pia mater",
+      "B": "Arachnoid mater",
+      "C": "Dura mater",
+      "D": "Subarachnoid space"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The arachnoid mater is a delicate, web-like layer between the dura mater and pia mater."
+  },
+  {
+    "id": 195,
+    "question": "Which meningeal space contains cerebrospinal fluid (CSF)?",
+    "options": {
+      "A": "Epidural space",
+      "B": "Subdural space",
+      "C": "Subarachnoid space",
+      "D": "Pia mater"
+    },
+    "answerKey": "C",
+    "correctIndex": 2,
+    "explanation": "The subarachnoid space lies between the arachnoid and pia mater and contains CSF."
+  },
+  {
+    "id": 196,
+    "question": "Which meningeal layer is a delicate covering closely adherent to the spinal cord?",
+    "options": {
+      "A": "Dura mater",
+      "B": "Pia mater",
+      "C": "Arachnoid mater",
+      "D": "Subarachnoid space"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The pia mater is the innermost delicate meningeal layer that directly invests the spinal cord."
+  },
+  {
+    "id": 197,
+    "question": "Which modification of the pia mater forms a longitudinal thickening along the spinal cord?",
+    "options": {
+      "A": "Linea splendens",
+      "B": "Filum terminale",
+      "C": "Ligamentum denticulatum",
+      "D": "Arachnoid trabeculae"
+    },
+    "answerKey": "A",
+    "correctIndex": 0,
+    "explanation": "The linea splendens is a longitudinal thickening of the pia mater along the spinal cord."
+  },
+  {
+    "id": 198,
+    "question": "Which modification of pia mater anchors the spinal cord laterally to the dura mater?",
+    "options": {
+      "A": "Filum terminale",
+      "B": "Linea splendens",
+      "C": "Ligamentum denticulatum",
+      "D": "Conus medullaris"
+    },
+    "answerKey": "C",
+    "correctIndex": 2,
+    "explanation": "The ligamentum denticulatum is a tooth-like lateral extension of pia mater that helps anchor the spinal cord laterally."
+  },
+  {
+    "id": 199,
+    "question": "What is the thin thread of pia mater that anchors the spinal cord to the coccyx called?",
+    "options": {
+      "A": "Conus medullaris",
+      "B": "Filum terminale",
+      "C": "Linea splendens",
+      "D": "Ligamentum denticulatum"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The filum terminale is a thin thread of pia mater that extends from the conus medullaris to anchor the cord to the coccyx."
+  },
+  {
+    "id": 200,
+    "question": "In multiple sclerosis (MS), which cells are primarily affected?",
+    "options": {
+      "A": "Schwann cells",
+      "B": "Oligodendrocytes",
+      "C": "Astrocytes",
+      "D": "Microglia"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "MS is a demyelinating disease of the CNS in which oligodendrocytes are destroyed, while Schwann cells of the PNS are not affected."
+  },
+  {
+    "id": 201,
+    "question": "At which vertebral level does the spinal cord end in adults?",
+    "options": {
+      "A": "Upper border of L3",
+      "B": "Lower border of L1",
+      "C": "Upper border of T12",
+      "D": "Lower border of L2"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "In adults, the spinal cord ends at the lower border of the L1 vertebra."
+  },
+  {
+    "id": 202,
+    "question": "At which vertebral level does the spinal cord end in newborns?",
+    "options": {
+      "A": "Lower border of L1",
+      "B": "Upper border of L3",
+      "C": "Upper border of T12",
+      "D": "Lower border of L2"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "In newborns, the spinal cord ends higher at the upper border of L3 vertebra."
+  },
+  {
+    "id": 203,
+    "question": "How many pairs of spinal nerves are present in humans?",
+    "options": {
+      "A": "30",
+      "B": "31",
+      "C": "32",
+      "D": "33"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "There are 31 pairs of spinal nerves: 8 cervical, 12 thoracic, 5 lumbar, 5 sacral, and 1 coccygeal."
+  },
+  {
+    "id": 204,
+    "question": "Cerebrospinal fluid (CSF) is located in which meningeal space?",
+    "options": {
+      "A": "Epidural space",
+      "B": "Subdural space",
+      "C": "Subarachnoid space",
+      "D": "Between dura and skull"
+    },
+    "answerKey": "C",
+    "correctIndex": 2,
+    "explanation": "The CSF circulates in the subarachnoid space, cushioning and protecting the spinal cord and brain."
+  },
+  {
+    "id": 205,
+    "question": "Which part of the spinal cord forms the inner core?",
+    "options": {
+      "A": "White matter",
+      "B": "Grey matter",
+      "C": "Pia mater",
+      "D": "Ependyma"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The inner core of the spinal cord is composed of grey matter, which contains neuronal cell bodies."
+  },
+  {
+    "id": 206,
+    "question": "Which part of the spinal cord forms the outer region?",
+    "options": {
+      "A": "Grey matter",
+      "B": "White matter",
+      "C": "Pia mater",
+      "D": "Ependyma"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The outer region of the spinal cord is formed by white matter, which contains bundles of axons."
+  },
+  {
+    "id": 207,
+    "question": "Which tracts of the spinal cord carry sensory information to the brain?",
+    "options": {
+      "A": "Ascending tracts",
+      "B": "Descending tracts",
+      "C": "Motor tracts",
+      "D": "Corticospinal tracts"
+    },
+    "answerKey": "A",
+    "correctIndex": 0,
+    "explanation": "Ascending tracts are sensory pathways that carry signals from the periphery to the brain."
+  },
+  {
+    "id": 208,
+    "question": "Which tracts of the spinal cord carry motor information from the brain to the body?",
+    "options": {
+      "A": "Ascending tracts",
+      "B": "Descending tracts",
+      "C": "Spinothalamic tracts",
+      "D": "Dorsal column tracts"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "Descending tracts are motor pathways that transmit commands from the brain to muscles and glands."
+  },
+  {
+    "id": 209,
+    "question": "The Fasciculus gracilis tract carries sensations from which part of the body?",
+    "options": {
+      "A": "Upper limb and upper trunk",
+      "B": "Lower limb and lower trunk",
+      "C": "Face and neck",
+      "D": "Viscera"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The Fasciculus gracilis transmits fine touch, vibration, and proprioception from the lower limb and lower trunk."
+  },
+  {
+    "id": 210,
+    "question": "The Fasciculus cuneatus tract carries sensations from which part of the body?",
+    "options": {
+      "A": "Lower limb and lower trunk",
+      "B": "Upper limb and upper trunk",
+      "C": "Face and neck",
+      "D": "Pelvis"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The Fasciculus cuneatus transmits fine touch, vibration, and proprioception from the upper limb and upper trunk."
+  },
+  {
+    "id": 211,
+    "question": "Which specialisation of pia mater runs as a thickened longitudinal band on the anterior surface of the spinal cord?",
+    "options": {
+      "A": "Linea splendens",
+      "B": "Filum terminale",
+      "C": "Ligamentum denticulatum",
+      "D": "Arachnoid trabeculae"
+    },
+    "answerKey": "A",
+    "correctIndex": 0,
+    "explanation": "Linea splendens is a longitudinal thickening of pia mater along the anterior aspect of the spinal cord."
+  },
+  {
+    "id": 212,
+    "question": "Which structure of pia mater is tooth-like and helps stabilise the cord laterally?",
+    "options": {
+      "A": "Linea splendens",
+      "B": "Ligamentum denticulatum",
+      "C": "Filum terminale",
+      "D": "Conus medullaris"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The ligamentum denticulatum is a tooth-like lateral extension of pia mater that anchors the spinal cord laterally to the dura."
+  },
+  {
+    "id": 213,
+    "question": "What is the thin extension of pia mater that anchors the spinal cord to the coccyx called?",
+    "options": {
+      "A": "Linea splendens",
+      "B": "Filum terminale",
+      "C": "Ligamentum denticulatum",
+      "D": "Conus medullaris"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The filum terminale is a slender extension of pia mater that continues from the conus medullaris to anchor the cord to the coccyx."
+  },
+  {
+    "id": 215,
+    "question": "Which sensation is carried by the anterior spinothalamic tract?",
+    "options": {
+      "A": "Pain and temperature",
+      "B": "Crude touch and pressure",
+      "C": "Fine touch and vibration",
+      "D": "Conscious proprioception"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The anterior spinothalamic tract carries crude touch and pressure sensations."
+  },
+  {
+    "id": 216,
+    "question": "Which sensations are carried by the lateral spinothalamic tract?",
+    "options": {
+      "A": "Pain and temperature",
+      "B": "Crude touch and pressure",
+      "C": "Conscious proprioception",
+      "D": "Fine touch and vibration"
+    },
+    "answerKey": "A",
+    "correctIndex": 0,
+    "explanation": "The lateral spinothalamic tract transmits pain and temperature sensations."
+  },
+  {
+    "id": 217,
+    "question": "In Brown-Séquard syndrome, which sensation is lost on the contralateral side?",
+    "options": {
+      "A": "Proprioception and fine touch",
+      "B": "Pain and temperature",
+      "C": "Crude touch",
+      "D": "All sensations"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "Hemisection of the spinal cord results in contralateral loss of pain and temperature sensations due to crossing of spinothalamic fibers."
+  },
+  {
+    "id": 218,
+    "question": "Which tract carries unconscious proprioception from the lower limb?",
+    "options": {
+      "A": "Ventral spinocerebellar tract",
+      "B": "Dorsal spinocerebellar tract",
+      "C": "Spinothalamic tract",
+      "D": "Corticospinal tract"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The dorsal spinocerebellar tract conveys unconscious proprioceptive information from the lower limb."
+  },
+  {
+    "id": 219,
+    "question": "Which tract carries unconscious proprioception via crossed fibers?",
+    "options": {
+      "A": "Dorsal spinocerebellar tract",
+      "B": "Ventral spinocerebellar tract",
+      "C": "Fasciculus gracilis",
+      "D": "Spinothalamic tract"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The ventral spinocerebellar tract carries unconscious proprioception through fibers that cross before ascending."
+  },
+  {
+    "id": 220,
+    "question": "The dorsal column pathway carries which sensations?",
+    "options": {
+      "A": "Pain and temperature",
+      "B": "Crude touch and pressure",
+      "C": "Conscious proprioception, vibration, fine touch",
+      "D": "Motor control"
+    },
+    "answerKey": "C",
+    "correctIndex": 2,
+    "explanation": "The dorsal column pathway transmits conscious proprioception, vibration sense, fine touch, two-point discrimination, and stereognosis."
+  },
+  {
+    "id": 221,
+    "question": "Which tract of the dorsal column carries sensations from the lower limb and trunk?",
+    "options": {
+      "A": "Fasciculus cuneatus",
+      "B": "Fasciculus gracilis",
+      "C": "Spinothalamic tract",
+      "D": "Corticospinal tract"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "Fasciculus gracilis carries proprioception and fine touch sensations from the lower limb and lower trunk."
+  },
+  {
+    "id": 222,
+    "question": "Which tract of the dorsal column carries sensations from the upper limb and trunk?",
+    "options": {
+      "A": "Fasciculus cuneatus",
+      "B": "Fasciculus gracilis",
+      "C": "Spinothalamic tract",
+      "D": "Corticospinal tract"
+    },
+    "answerKey": "A",
+    "correctIndex": 0,
+    "explanation": "Fasciculus cuneatus conveys proprioceptive and fine touch sensations from the upper limb and upper trunk."
+  },
+  {
+    "id": 223,
+    "question": "In Brown-Séquard syndrome, which sensation is lost ipsilaterally?",
+    "options": {
+      "A": "Pain and temperature",
+      "B": "Crude touch",
+      "C": "Fine touch and proprioception",
+      "D": "All sensations"
+    },
+    "answerKey": "C",
+    "correctIndex": 2,
+    "explanation": "Hemisection of the spinal cord causes ipsilateral loss of dorsal column sensations such as fine touch, vibration, and proprioception."
+  },
+  {
+    "id": 224,
+    "question": "Which nucleus of the trigeminal pathway carries proprioception from the face?",
+    "options": {
+      "A": "Spinal nucleus",
+      "B": "Chief pontine nucleus",
+      "C": "Mesencephalic nucleus",
+      "D": "Thalamic VPM"
+    },
+    "answerKey": "C",
+    "correctIndex": 2,
+    "explanation": "The mesencephalic nucleus of the trigeminal pathway carries proprioceptive input from the face."
+  },
+  {
+    "id": 225,
+    "question": "Which trigeminal nucleus carries touch and pressure sensations?",
+    "options": {
+      "A": "Spinal nucleus",
+      "B": "Chief pontine nucleus",
+      "C": "Mesencephalic nucleus",
+      "D": "Thalamic VPM"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The chief pontine (main sensory) nucleus processes touch and pressure sensations from the face."
+  },
+  {
+    "id": 226,
+    "question": "Which trigeminal nucleus carries pain and temperature sensations?",
+    "options": {
+      "A": "Spinal nucleus",
+      "B": "Chief pontine nucleus",
+      "C": "Mesencephalic nucleus",
+      "D": "Thalamic VPM"
+    },
+    "answerKey": "A",
+    "correctIndex": 0,
+    "explanation": "The spinal nucleus of the trigeminal nerve carries pain and temperature sensations from the face."
+  },
+  {
+    "id": 227,
+    "question": "Which thalamic nucleus relays trigeminal sensations to the sensory cortex?",
+    "options": {
+      "A": "VPL",
+      "B": "VPM",
+      "C": "MDN",
+      "D": "LGN"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The ventral posteromedial (VPM) nucleus of the thalamus relays trigeminal sensations to the primary sensory cortex."
+  },
+  {
+    "id": 228,
+    "question": "Which tract controls voluntary movements of the limbs?",
+    "options": {
+      "A": "Corticospinal tract",
+      "B": "Spinothalamic tract",
+      "C": "Spinocerebellar tract",
+      "D": "Dorsal column pathway"
+    },
+    "answerKey": "A",
+    "correctIndex": 0,
+    "explanation": "The corticospinal tract (pyramidal tract) originates in the motor cortex and controls voluntary limb movements."
+  },
+  {
+    "id": 229,
+    "question": "Where do most fibers of the corticospinal tract cross to the opposite side?",
+    "options": {
+      "A": "Midbrain",
+      "B": "Pons",
+      "C": "Lower medulla (pyramidal decussation)",
+      "D": "Spinal cord"
+    },
+    "answerKey": "C",
+    "correctIndex": 2,
+    "explanation": "About 85% of corticospinal fibers cross at the pyramidal decussation in the lower medulla before descending to the spinal cord."
+  },
+  {
+    "id": 230,
+    "question": "Damage to the corticospinal tract results in which clinical feature?",
+    "options": {
+      "A": "Ipsilateral paralysis below lesion",
+      "B": "Contralateral paralysis below lesion",
+      "C": "Loss of pain and temperature",
+      "D": "Ataxia"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "Injury to the corticospinal tract leads to contralateral paralysis below the lesion due to decussation of fibers."
+  },
+  {
+    "id": 231,
+    "question": "The corticonuclear tract primarily controls which part of the body?",
+    "options": {
+      "A": "Upper limbs",
+      "B": "Lower limbs",
+      "C": "Head and neck muscles",
+      "D": "Trunk"
+    },
+    "answerKey": "C",
+    "correctIndex": 2,
+    "explanation": "The corticonuclear tract projects from the motor cortex to cranial nerve motor nuclei to control head and neck muscles."
+  },
+  {
+    "id": 233,
+    "question": "Which tract damage in Brown-Séquard syndrome causes ipsilateral paralysis?",
+    "options": {
+      "A": "Dorsal column",
+      "B": "Spinothalamic tract",
+      "C": "Corticospinal tract",
+      "D": "Spinocerebellar tract"
+    },
+    "answerKey": "C",
+    "correctIndex": 2,
+    "explanation": "Ipsilateral paralysis occurs due to corticospinal tract damage in hemisection of the spinal cord."
+  },
+  {
+    "id": 234,
+    "question": "Which sensations are lost ipsilaterally in Brown-Séquard syndrome?",
+    "options": {
+      "A": "Pain and temperature",
+      "B": "Proprioception, fine touch, vibration",
+      "C": "Crude touch",
+      "D": "All sensations"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "Ipsilateral loss of proprioception, fine touch, and vibration occurs due to dorsal column damage."
+  },
+  {
+    "id": 235,
+    "question": "Which sensations are lost contralaterally in Brown-Séquard syndrome?",
+    "options": {
+      "A": "Pain and temperature",
+      "B": "Fine touch and vibration",
+      "C": "Proprioception",
+      "D": "All sensations"
+    },
+    "answerKey": "A",
+    "correctIndex": 0,
+    "explanation": "Contralateral loss of pain and temperature occurs due to spinothalamic tract damage, which crosses soon after entry."
+  },
+  {
+    "id": 236,
+    "question": "At which vertebral interspace is lumbar puncture usually performed in adults?",
+    "options": {
+      "A": "L2–L3",
+      "B": "L3–L4 or L4–L5",
+      "C": "L5–S1",
+      "D": "T12–L1"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "In adults, lumbar puncture is performed at the L3–L4 or L4–L5 interspace, below the level of the spinal cord termination."
+  },
+  {
+    "id": 237,
+    "question": "At which vertebral interspace is lumbar puncture performed in children?",
+    "options": {
+      "A": "L2–L3",
+      "B": "L3–L4",
+      "C": "L4–L5",
+      "D": "L5–S1"
+    },
+    "answerKey": "C",
+    "correctIndex": 2,
+    "explanation": "In children, the spinal cord ends lower, so lumbar puncture is usually performed at the L4–L5 interspace."
+  },
+  {
+    "id": 238,
+    "question": "Which is the correct order of layers pierced during spinal anaesthesia?",
+    "options": {
+      "A": "Skin → Superficial fascia → Ligaments → Epidural space → Dura → Arachnoid → Subarachnoid space",
+      "B": "Skin → Subcutaneous tissue → Dura → Arachnoid → Subarachnoid",
+      "C": "Skin → Epidural → Dura → Subarachnoid",
+      "D": "Skin → Ligamentum flavum → Subarachnoid"
+    },
+    "answerKey": "A",
+    "correctIndex": 0,
+    "explanation": "Mnemonic 3 SILE DAS: Skin → Superficial fascia → Supraspinous ligament → Interspinous ligament → Ligamentum flavum → Epidural space → Dura → Arachnoid → Subarachnoid space."
+  },
+  {
+    "id": 239,
+    "question": "In epidural anaesthesia, which meningeal layers are NOT pierced?",
+    "options": {
+      "A": "Dura mater and arachnoid mater",
+      "B": "Pia mater and dura mater",
+      "C": "Ligamentum flavum and arachnoid mater",
+      "D": "Subarachnoid space and pia mater"
+    },
+    "answerKey": "A",
+    "correctIndex": 0,
+    "explanation": "In epidural anaesthesia, the dura and arachnoid mater are not pierced; the anaesthetic is injected into the epidural space."
+  },
+  {
+    "id": 240,
+    "question": "Which descending tract is involved in fine motor control?",
+    "options": {
+      "A": "Rubrospinal tract",
+      "B": "Vestibulospinal tract",
+      "C": "Tectospinal tract",
+      "D": "Corticospinal tract"
+    },
+    "answerKey": "A",
+    "correctIndex": 0,
+    "explanation": "The rubrospinal tract contributes to fine motor control, particularly of distal limb muscles."
+  },
+  {
+    "id": 241,
+    "question": "Which descending tract maintains balance and posture?",
+    "options": {
+      "A": "Rubrospinal tract",
+      "B": "Vestibulospinal tract",
+      "C": "Tectospinal tract",
+      "D": "Reticulospinal tract"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The vestibulospinal tract facilitates extensor muscle tone and helps maintain posture and balance."
+  },
+  {
+    "id": 242,
+    "question": "Which descending tract coordinates head–eye–body movements?",
+    "options": {
+      "A": "Rubrospinal tract",
+      "B": "Vestibulospinal tract",
+      "C": "Tectospinal tract",
+      "D": "Corticospinal tract"
+    },
+    "answerKey": "C",
+    "correctIndex": 2,
+    "explanation": "The tectospinal tract originates in the superior colliculus and coordinates reflexive head, eye, and body movements in response to visual/auditory stimuli."
+  },
+  {
+    "id": 243,
+    "question": "Which vein is found in the superior (quadrigeminal) cistern?",
+    "options": {
+      "A": "Basilar vein",
+      "B": "Great cerebral vein",
+      "C": "Internal cerebral vein",
+      "D": "Superior sagittal sinus"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The superior or quadrigeminal cistern contains the great cerebral vein."
+  },
+  {
+    "id": 244,
+    "question": "Which vessels are contained in the cerebellomedullary cistern (cisterna magna)?",
+    "options": {
+      "A": "Posterior cerebral artery and PCoA",
+      "B": "Vertebral artery and PICA",
+      "C": "Basilar artery",
+      "D": "Middle cerebral artery"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The cisterna magna contains the vertebral artery and posterior inferior cerebellar artery (PICA)."
+  },
+  {
+    "id": 245,
+    "question": "Which artery runs through the pontine cistern?",
+    "options": {
+      "A": "Middle cerebral artery",
+      "B": "Basilar artery",
+      "C": "Posterior inferior cerebellar artery",
+      "D": "Vertebral artery"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The pontine cistern contains the basilar artery."
+  },
+  {
+    "id": 246,
+    "question": "The interpeduncular cistern contains which arteries?",
+    "options": {
+      "A": "Middle cerebral artery",
+      "B": "Posterior cerebral and posterior communicating arteries",
+      "C": "Vertebral artery and PICA",
+      "D": "Basilar artery"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The interpeduncular cistern contains the posterior cerebral artery and posterior communicating artery."
+  },
+  {
+    "id": 247,
+    "question": "Which artery is found in the Sylvian cistern?",
+    "options": {
+      "A": "Anterior cerebral artery",
+      "B": "Basilar artery",
+      "C": "Middle cerebral artery",
+      "D": "Posterior inferior cerebellar artery"
+    },
+    "answerKey": "C",
+    "correctIndex": 2,
+    "explanation": "The Sylvian cistern contains the middle cerebral artery."
+  },
+  {
+    "id": 248,
+    "question": "The ventricles of the brain are lined by which epithelium?",
+    "options": {
+      "A": "Cuboidal cells",
+      "B": "Ependymal cells (ciliated)",
+      "C": "Simple squamous epithelium",
+      "D": "Transitional epithelium"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The ventricles are lined by ependymal cells, which are ciliated columnar epithelium."
+  },
+  {
+    "id": 249,
+    "question": "Extension of spinal cord in adults is?",
+    "options": {
+      "A": "Upper border of L1",
+      "B": "Lower border of L1",
+      "C": "Upper border of L3",
+      "D": "Lower border of L3"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "In adults, the spinal cord ends at the lower border of L1 vertebra."
+  },
+  {
+    "id": 250,
+    "question": "The majority of corticospinal tract fibers cross the midline at which level?",
+    "options": {
+      "A": "Midbrain",
+      "B": "Pons",
+      "C": "Medulla (pyramidal decussation)",
+      "D": "Spinal cord"
+    },
+    "answerKey": "C",
+    "correctIndex": 2,
+    "explanation": "Most corticospinal tract fibers cross in the lower medulla at the pyramidal decussation."
+  },
+  {
+    "id": 251,
+    "question": "Which structure is seen on the ventral surface of the midbrain?",
+    "options": {
+      "A": "Superior colliculi",
+      "B": "Inferior colliculi",
+      "C": "Cerebral peduncles",
+      "D": "Gracile tubercle"
+    },
+    "answerKey": "C",
+    "correctIndex": 2,
+    "explanation": "The cerebral peduncles are prominent on the ventral aspect of the midbrain."
+  },
+  {
+    "id": 252,
+    "question": "Which structure is seen on the ventral aspect of the pons?",
+    "options": {
+      "A": "Basilar groove",
+      "B": "Superior colliculus",
+      "C": "Inferior olive",
+      "D": "Cerebral peduncle"
+    },
+    "answerKey": "A",
+    "correctIndex": 0,
+    "explanation": "The ventral surface of the pons shows a broad bulge with a midline basilar groove for the basilar artery."
+  },
+  {
+    "id": 253,
+    "question": "Which structures are seen on the ventral aspect of the medulla?",
+    "options": {
+      "A": "Gracile tubercle and cuneate tubercle",
+      "B": "Pyramids and olives",
+      "C": "Superior and inferior colliculi",
+      "D": "Cerebral peduncles"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "On the ventral side, the medulla shows the pyramids medially and olives laterally."
+  },
+  {
+    "id": 254,
+    "question": "Which colliculi are present on the dorsal aspect of the midbrain?",
+    "options": {
+      "A": "Pyramids and olives",
+      "B": "Gracile and cuneate tubercles",
+      "C": "Superior and inferior colliculi",
+      "D": "Cerebral peduncles"
+    },
+    "answerKey": "C",
+    "correctIndex": 2,
+    "explanation": "The dorsal surface of the midbrain has two superior and two inferior colliculi."
+  },
+  {
+    "id": 255,
+    "question": "The dorsal surface of the pons contributes to which structure?",
+    "options": {
+      "A": "Basilar groove",
+      "B": "Floor of the fourth ventricle",
+      "C": "Superior colliculus",
+      "D": "Cerebral aqueduct"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The dorsal surface of the pons forms the upper part of the floor of the fourth ventricle."
+  },
+  {
+    "id": 256,
+    "question": "Which structures are seen on the dorsal surface of the medulla?",
+    "options": {
+      "A": "Gracile tubercle and cuneate tubercle",
+      "B": "Pyramids and olives",
+      "C": "Superior and inferior colliculi",
+      "D": "Cerebral peduncles"
+    },
+    "answerKey": "A",
+    "correctIndex": 0,
+    "explanation": "The dorsal medulla shows the gracile tubercle medially and the cuneate tubercle laterally."
+  },
+  {
+    "id": 257,
+    "question": "The floor of the fourth ventricle is also called?",
+    "options": {
+      "A": "Basilar groove",
+      "B": "Rhomboid fossa",
+      "C": "Interpeduncular cistern",
+      "D": "Sylvian cistern"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The floor of the fourth ventricle is also called the rhomboid fossa."
+  },
+  {
+    "id": 258,
+    "question": "What is a cistern in neuroanatomy?",
+    "options": {
+      "A": "Enlarged subarachnoid space",
+      "B": "Part of ventricular system",
+      "C": "Thalamic relay area",
+      "D": "Spinal cord enlargement"
+    },
+    "answerKey": "A",
+    "correctIndex": 0,
+    "explanation": "Cisterns are enlarged subarachnoid spaces that contain CSF and vascular structures."
+  },
+  {
+    "id": 259,
+    "question": "During lumbar puncture, which space is tapped to obtain cerebrospinal fluid?",
+    "options": {
+      "A": "Epidural space",
+      "B": "Subdural space",
+      "C": "Subarachnoid space",
+      "D": "Ventricular space"
+    },
+    "answerKey": "C",
+    "correctIndex": 2,
+    "explanation": "Lumbar puncture involves inserting a needle into the subarachnoid space to collect CSF."
+  },
+  {
+    "id": 260,
+    "question": "Where does the pyramidal decussation of corticospinal tract fibers occur?",
+    "options": {
+      "A": "Midbrain",
+      "B": "Pons",
+      "C": "Lower medulla",
+      "D": "Upper spinal cord"
+    },
+    "answerKey": "C",
+    "correctIndex": 2,
+    "explanation": "The corticospinal tract fibers cross at the pyramidal decussation in the lower medulla."
+  },
+  {
+    "id": 261,
+    "question": "Which structure forms the floor of the fourth ventricle?",
+    "options": {
+      "A": "Dorsal surface of cerebellum",
+      "B": "Dorsal surface of pons and medulla",
+      "C": "Cerebral peduncles",
+      "D": "Thalamus"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The floor of the fourth ventricle (rhomboid fossa) is formed by the dorsal surfaces of the pons and medulla."
+  },
+  {
+    "id": 262,
+    "question": "Which sulcus divides the medial motor area from the lateral sensory area in the floor of the fourth ventricle?",
+    "options": {
+      "A": "Median sulcus",
+      "B": "Sulcus limitans",
+      "C": "Central sulcus",
+      "D": "Interpeduncular sulcus"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The sulcus limitans separates the medial motor nuclei from the lateral sensory nuclei."
+  },
+  {
+    "id": 263,
+    "question": "Which nucleus elevation forms the facial colliculus in the floor of the fourth ventricle?",
+    "options": {
+      "A": "CN VI nucleus with CN VII fibers looping around",
+      "B": "CN VII nucleus only",
+      "C": "CN VIII nucleus",
+      "D": "CN IX nucleus"
+    },
+    "answerKey": "A",
+    "correctIndex": 0,
+    "explanation": "The facial colliculus is produced by CN VII fibers looping around the abducens (CN VI) nucleus."
+  },
+  {
+    "id": 264,
+    "question": "Injury to the facial colliculus leads to damage of which cranial nerve nucleus?",
+    "options": {
+      "A": "CN VI nucleus",
+      "B": "CN VII nucleus",
+      "C": "CN VIII nucleus",
+      "D": "CN IX nucleus"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "Injury to the facial colliculus typically affects the facial (CN VII) nucleus, causing facial paralysis."
+  },
+  {
+    "id": 265,
+    "question": "Weber syndrome results from occlusion of which artery?",
+    "options": {
+      "A": "Anterior spinal artery",
+      "B": "Basilar artery",
+      "C": "Posterior cerebral artery (paramedian branch)",
+      "D": "PICA"
+    },
+    "answerKey": "C",
+    "correctIndex": 2,
+    "explanation": "Weber syndrome is due to occlusion of paramedian branches of the posterior cerebral artery."
+  },
+  {
+    "id": 266,
+    "question": "Which clinical features are seen in Weber syndrome?",
+    "options": {
+      "A": "Ipsilateral CN III palsy and contralateral hemiplegia",
+      "B": "Ipsilateral CN VI palsy and contralateral ataxia",
+      "C": "Ipsilateral CN VII palsy and contralateral tremor",
+      "D": "Ipsilateral CN V palsy and contralateral hemiplegia"
+    },
+    "answerKey": "A",
+    "correctIndex": 0,
+    "explanation": "Weber syndrome causes ipsilateral CN III palsy and contralateral hemiplegia due to cerebral peduncle involvement."
+  },
+  {
+    "id": 267,
+    "question": "Benedikt syndrome involves which artery?",
+    "options": {
+      "A": "Anterior spinal artery",
+      "B": "Posterior cerebral artery (perforating branches)",
+      "C": "Basilar artery",
+      "D": "PICA"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "Benedikt syndrome is due to occlusion of perforating branches of the posterior cerebral artery."
+  },
+  {
+    "id": 268,
+    "question": "Which features are seen in Benedikt syndrome?",
+    "options": {
+      "A": "Ipsilateral CN III palsy with contralateral hemiplegia",
+      "B": "Ipsilateral CN III palsy with contralateral tremor, chorea, ataxia",
+      "C": "Ipsilateral CN VII palsy with contralateral hemiplegia",
+      "D": "Ipsilateral CN VI palsy with contralateral loss of sensation"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "Benedikt syndrome involves the red nucleus and medial lemniscus, causing ipsilateral CN III palsy and contralateral involuntary movements."
+  },
+  {
+    "id": 269,
+    "question": "Millard–Gubler syndrome is caused by occlusion of which artery?",
+    "options": {
+      "A": "Posterior cerebral artery",
+      "B": "Basilar artery",
+      "C": "Anterior spinal artery",
+      "D": "PICA"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "Millard–Gubler syndrome is due to basilar artery occlusion affecting the basis pontis and CN VI + VII nuclei."
+  },
+  {
+    "id": 270,
+    "question": "Which clinical features are seen in Millard–Gubler syndrome?",
+    "options": {
+      "A": "Ipsilateral facial palsy, ipsilateral lateral rectus palsy, contralateral hemiplegia",
+      "B": "Ipsilateral CN III palsy, contralateral tremor",
+      "C": "Ipsilateral CN VIII palsy, contralateral sensory loss",
+      "D": "Ipsilateral tongue palsy, contralateral hemiplegia"
+    },
+    "answerKey": "A",
+    "correctIndex": 0,
+    "explanation": "Millard–Gubler syndrome features include ipsilateral CN VI and VII palsy with contralateral hemiplegia."
+  },
+  {
+    "id": 271,
+    "question": "Cerebellopontine angle syndrome most commonly results from which tumor?",
+    "options": {
+      "A": "Meningioma",
+      "B": "Vestibular schwannoma",
+      "C": "Glioblastoma",
+      "D": "Astrocytoma"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "Vestibular schwannoma is the most common tumor causing cerebellopontine angle syndrome."
+  },
+  {
+    "id": 272,
+    "question": "Which cranial nerves are affected in cerebellopontine angle syndrome?",
+    "options": {
+      "A": "CN V, VII, VIII",
+      "B": "CN III, IV, VI",
+      "C": "CN IX, X, XI",
+      "D": "CN II, V, XII"
+    },
+    "answerKey": "A",
+    "correctIndex": 0,
+    "explanation": "Vestibular schwannoma at the cerebellopontine angle affects CN V, VII, and VIII."
+  },
+  {
+    "id": 273,
+    "question": "Medial medullary syndrome is caused by occlusion of which artery?",
+    "options": {
+      "A": "Basilar artery",
+      "B": "Posterior cerebral artery",
+      "C": "Anterior spinal artery",
+      "D": "PICA"
+    },
+    "answerKey": "C",
+    "correctIndex": 2,
+    "explanation": "Medial medullary syndrome is due to anterior spinal artery occlusion."
+  },
+  {
+    "id": 274,
+    "question": "Which features are seen in medial medullary syndrome?",
+    "options": {
+      "A": "Contralateral hemiplegia, contralateral loss of proprioception, ipsilateral hypoglossal palsy",
+      "B": "Contralateral hemiplegia, ipsilateral facial palsy",
+      "C": "Contralateral pain and temperature loss, ipsilateral CN IX palsy",
+      "D": "Ipsilateral hearing loss, contralateral ataxia"
+    },
+    "answerKey": "A",
+    "correctIndex": 0,
+    "explanation": "Medial medullary syndrome causes contralateral hemiplegia (corticospinal), contralateral proprioception/vibration loss (medial lemniscus), and ipsilateral hypoglossal palsy."
+  },
+  {
+    "id": 275,
+    "question": "Lateral medullary (Wallenberg) syndrome is caused by occlusion of which artery?",
+    "options": {
+      "A": "Basilar artery",
+      "B": "Anterior spinal artery",
+      "C": "Posterior inferior cerebellar artery (PICA)",
+      "D": "Posterior cerebral artery"
+    },
+    "answerKey": "C",
+    "correctIndex": 2,
+    "explanation": "Wallenberg syndrome is due to PICA occlusion."
+  },
+  {
+    "id": 276,
+    "question": "Which feature is NOT seen in lateral medullary syndrome?",
+    "options": {
+      "A": "Ipsilateral facial pain and temperature loss",
+      "B": "Contralateral body pain and temperature loss",
+      "C": "Dysphagia and hoarseness",
+      "D": "Ipsilateral hemiplegia"
+    },
+    "answerKey": "D",
+    "correctIndex": 3,
+    "explanation": "Hemiplegia is not a feature; lateral medullary syndrome causes cranial nerve deficits, ataxia, and alternating sensory loss."
+  },
+  {
+    "id": 277,
+    "question": "Alternating hemianesthesia (crossed sensory loss) is characteristic of which lesions?",
+    "options": {
+      "A": "Cerebellum",
+      "B": "Spinal cord",
+      "C": "Brainstem",
+      "D": "Thalamus"
+    },
+    "answerKey": "C",
+    "correctIndex": 2,
+    "explanation": "Alternating hemianesthesia occurs in brainstem lesions due to involvement of cranial nerve nuclei (ipsilateral) and long tracts (contralateral)."
+  },
+  {
+    "id": 278,
+    "question": "What is a sulcus in the cerebrum?",
+    "options": {
+      "A": "Elevation between gyri",
+      "B": "Deep groove in brainstem",
+      "C": "Shallow depression or fissure on brain surface",
+      "D": "White matter tract"
+    },
+    "answerKey": "C",
+    "correctIndex": 2,
+    "explanation": "A sulcus is a shallow depression or fissure on the surface of the brain."
+  },
+  {
+    "id": 279,
+    "question": "What is a gyrus?",
+    "options": {
+      "A": "Shallow depression on brain surface",
+      "B": "Elevation between two sulci",
+      "C": "Bundle of axons",
+      "D": "Part of ventricular system"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "A gyrus is the raised elevation between two sulci."
+  },
+  {
+    "id": 280,
+    "question": "Which sulcus separates the frontal lobe (motor) from the parietal lobe (sensory)?",
+    "options": {
+      "A": "Lateral sulcus",
+      "B": "Central sulcus",
+      "C": "Calcarine sulcus",
+      "D": "Precentral sulcus"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The central sulcus separates the frontal lobe (motor cortex) from the parietal lobe (sensory cortex)."
+  },
+  {
+    "id": 281,
+    "question": "The lateral sulcus (Sylvian fissure) separates which lobes?",
+    "options": {
+      "A": "Frontal from parietal",
+      "B": "Frontal/parietal from temporal",
+      "C": "Parietal from occipital",
+      "D": "Frontal from occipital"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The lateral sulcus divides the frontal and parietal lobes from the temporal lobe."
+  },
+  {
+    "id": 282,
+    "question": "Which sulcus lies on the medial surface of the occipital lobe?",
+    "options": {
+      "A": "Central sulcus",
+      "B": "Calcarine sulcus",
+      "C": "Lateral sulcus",
+      "D": "Postcentral sulcus"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The calcarine sulcus, located on the medial surface of the occipital lobe, is associated with the visual cortex."
+  },
+  {
+    "id": 283,
+    "question": "The precentral gyrus corresponds to which functional area?",
+    "options": {
+      "A": "Primary sensory area",
+      "B": "Primary motor area",
+      "C": "Auditory cortex",
+      "D": "Visual cortex"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The precentral gyrus is the site of the primary motor area responsible for voluntary movements."
+  },
+  {
+    "id": 284,
+    "question": "The postcentral gyrus corresponds to which functional area?",
+    "options": {
+      "A": "Primary motor area",
+      "B": "Primary sensory area",
+      "C": "Wernicke’s area",
+      "D": "Auditory cortex"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The postcentral gyrus is the primary sensory area where sensations from the body are perceived."
+  },
+  {
+    "id": 285,
+    "question": "Which gyrus contains the frontal eye field (FEF)?",
+    "options": {
+      "A": "Superior frontal gyrus",
+      "B": "Middle frontal gyrus",
+      "C": "Inferior frontal gyrus",
+      "D": "Angular gyrus"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The frontal eye field is located in the middle frontal gyrus and controls conjugate horizontal eye movements."
+  },
+  {
+    "id": 286,
+    "question": "Broca’s area is located in which gyrus?",
+    "options": {
+      "A": "Middle frontal gyrus",
+      "B": "Inferior frontal gyrus",
+      "C": "Superior temporal gyrus",
+      "D": "Supramarginal gyrus"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "Broca’s area, responsible for motor speech, is found in the inferior frontal gyrus of the dominant hemisphere."
+  },
+  {
+    "id": 287,
+    "question": "Wernicke’s area is mainly located in which gyri?",
+    "options": {
+      "A": "Superior temporal gyrus, supramarginal and angular gyri",
+      "B": "Middle temporal gyrus only",
+      "C": "Inferior frontal gyrus",
+      "D": "Paracentral lobule"
+    },
+    "answerKey": "A",
+    "correctIndex": 0,
+    "explanation": "Wernicke’s area involves the superior temporal gyrus along with supramarginal and angular gyri, and is important for speech comprehension."
+  },
+  {
+    "id": 288,
+    "question": "The auditory cortex is located in which gyrus?",
+    "options": {
+      "A": "Inferior frontal gyrus",
+      "B": "Middle temporal gyrus",
+      "C": "Superior temporal gyrus (Heschl’s gyrus)",
+      "D": "Angular gyrus"
+    },
+    "answerKey": "C",
+    "correctIndex": 2,
+    "explanation": "The auditory cortex is located in the superior temporal gyrus, specifically in Heschl’s gyrus."
+  },
+  {
+    "id": 289,
+    "question": "The visual cortex is located around which sulcus?",
+    "options": {
+      "A": "Central sulcus",
+      "B": "Lateral sulcus",
+      "C": "Calcarine sulcus",
+      "D": "Parieto-occipital sulcus"
+    },
+    "answerKey": "C",
+    "correctIndex": 2,
+    "explanation": "The primary visual cortex lies around the calcarine sulcus on the medial surface of the occipital lobe."
+  },
+  {
+    "id": 290,
+    "question": "Which area of the cerebrum is responsible for planning movements?",
+    "options": {
+      "A": "Premotor area",
+      "B": "Primary motor area",
+      "C": "Primary sensory area",
+      "D": "Visual cortex"
+    },
+    "answerKey": "A",
+    "correctIndex": 0,
+    "explanation": "The premotor area, located anterior to the precentral gyrus, is involved in planning voluntary movements."
+  },
+  {
+    "id": 291,
+    "question": "Which cerebral lobe structure is involved in bladder and bowel control?",
+    "options": {
+      "A": "Paracentral lobule",
+      "B": "Angular gyrus",
+      "C": "Superior temporal gyrus",
+      "D": "Calcarine sulcus"
+    },
+    "answerKey": "A",
+    "correctIndex": 0,
+    "explanation": "The paracentral lobule on the medial surface around the central sulcus controls bladder and bowel functions."
+  },
+  {
+    "id": 292,
+    "question": "Which type of white fibers connect areas within the same hemisphere of the cerebrum?",
+    "options": {
+      "A": "Association fibers",
+      "B": "Commissural fibers",
+      "C": "Projection fibers",
+      "D": "Corticospinal fibers"
+    },
+    "answerKey": "A",
+    "correctIndex": 0,
+    "explanation": "Association fibers connect different cortical areas within the same cerebral hemisphere."
+  },
+  {
+    "id": 293,
+    "question": "Which association fiber bundle connects the frontal, parietal, and occipital lobes?",
+    "options": {
+      "A": "Uncinate fasciculus",
+      "B": "Superior longitudinal bundle",
+      "C": "Cingulum",
+      "D": "U-fibers"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The superior longitudinal bundle (arcuate fasciculus) links the frontal, parietal, and occipital lobes."
+  },
+  {
+    "id": 294,
+    "question": "Which association fiber connects the frontal lobe with the temporal lobe?",
+    "options": {
+      "A": "Cingulum",
+      "B": "Uncinate fasciculus",
+      "C": "Superior longitudinal bundle",
+      "D": "U-fibers"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The uncinate fasciculus connects the frontal and temporal lobes."
+  },
+  {
+    "id": 295,
+    "question": "Which association fiber connects frontal and parietal lobes with the parahippocampal region?",
+    "options": {
+      "A": "Cingulum",
+      "B": "Uncinate fasciculus",
+      "C": "U-fibers",
+      "D": "Superior longitudinal bundle"
+    },
+    "answerKey": "A",
+    "correctIndex": 0,
+    "explanation": "The cingulum connects the frontal and parietal lobes with the parahippocampal gyrus."
+  },
+  {
+    "id": 296,
+    "question": "Which white matter fibers connect adjacent gyri?",
+    "options": {
+      "A": "U-fibers",
+      "B": "Cingulum",
+      "C": "Commissural fibers",
+      "D": "Projection fibers"
+    },
+    "answerKey": "A",
+    "correctIndex": 0,
+    "explanation": "U-fibers are short association fibers that connect neighboring gyri."
+  },
+  {
+    "id": 297,
+    "question": "Which fibers connect corresponding areas of the two cerebral hemispheres?",
+    "options": {
+      "A": "Association fibers",
+      "B": "Commissural fibers",
+      "C": "Projection fibers",
+      "D": "Internal capsule fibers"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "Commissural fibers connect the two hemispheres, ensuring communication between them."
+  },
+  {
+    "id": 298,
+    "question": "Which is the largest commissural fiber bundle?",
+    "options": {
+      "A": "Anterior commissure",
+      "B": "Posterior commissure",
+      "C": "Corpus callosum",
+      "D": "Hippocampal commissure"
+    },
+    "answerKey": "C",
+    "correctIndex": 2,
+    "explanation": "The corpus callosum is the largest commissural fiber bundle in the brain."
+  },
+  {
+    "id": 299,
+    "question": "Which commissural fiber connects the temporal lobes and olfactory regions?",
+    "options": {
+      "A": "Posterior commissure",
+      "B": "Anterior commissure",
+      "C": "Hippocampal commissure",
+      "D": "Corpus callosum"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The anterior commissure connects the two temporal lobes and olfactory regions."
+  },
+  {
+    "id": 300,
+    "question": "Which commissure is involved in visual reflex pathways?",
+    "options": {
+      "A": "Anterior commissure",
+      "B": "Posterior commissure",
+      "C": "Hippocampal commissure",
+      "D": "Corpus callosum"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The posterior commissure is important for visual reflexes such as the pupillary light reflex."
+  },
+  {
+    "id": 301,
+    "question": "Which fibers connect the cerebral cortex with subcortical structures like thalamus and spinal cord?",
+    "options": {
+      "A": "Association fibers",
+      "B": "Commissural fibers",
+      "C": "Projection fibers",
+      "D": "Cingulum"
+    },
+    "answerKey": "C",
+    "correctIndex": 2,
+    "explanation": "Projection fibers connect the cortex with subcortical structures including thalamus, brainstem, and spinal cord."
+  },
+  {
+    "id": 302,
+    "question": "Which structure is the major pathway for ascending and descending tracts in the brain?",
+    "options": {
+      "A": "Corpus callosum",
+      "B": "Internal capsule",
+      "C": "Cingulum",
+      "D": "Superior longitudinal fasciculus"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The internal capsule is the major 'highway' for ascending sensory and descending motor tracts."
+  },
+  {
+    "id": 303,
+    "question": "Which part of the internal capsule carries corticospinal fibers for trunk and limb movements?",
+    "options": {
+      "A": "Anterior limb",
+      "B": "Posterior limb",
+      "C": "Genu",
+      "D": "Retrolenticular part"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "Corticospinal tract fibers for trunk and limbs pass through the posterior limb of the internal capsule."
+  },
+  {
+    "id": 304,
+    "question": "Corticonuclear fibers pass through which part of the internal capsule?",
+    "options": {
+      "A": "Anterior limb",
+      "B": "Posterior limb",
+      "C": "Genu",
+      "D": "Crus cerebri"
+    },
+    "answerKey": "C",
+    "correctIndex": 2,
+    "explanation": "The genu of the internal capsule carries corticonuclear fibers to cranial nerve motor nuclei."
+  },
+  {
+    "id": 305,
+    "question": "Sensory fibers from VPM and VPL thalamic nuclei pass through which part of the internal capsule?",
+    "options": {
+      "A": "Anterior limb",
+      "B": "Posterior limb",
+      "C": "Genu",
+      "D": "Sublenticular part"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The posterior limb of the internal capsule carries thalamocortical sensory fibers from the VPM and VPL nuclei."
   }
 ]

@@ -1,224 +1,310 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 <title>Quiz — Gen Z Mobile</title>
-<!-- Gen Z font stack (variable) -->
+<!-- Gen‑Z variable fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Outfit:wght@300..700&family=Manrope:wght@300..800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0b1020; /* dark default for punchy vibe */
-    --card:#0f172a; --ink:#e5e7eb; --muted:#93a4ba; --line:#1f2a44;
+    --bg:#0b1020; --card:#0f172a; --ink:#e5e7eb; --muted:#93a4ba; --line:#1f2a44;
     --brand:#7c3aed; --brand2:#22d3ee; --ok:#10b981; --bad:#ef4444;
-    --opt:#0b1326; --opt-hover:#111c34;
-    --ring: 0 0 0 3px rgba(124,58,237,.25);
-    --font-sans: "Space Grotesk","Outfit","Manrope",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    --opt:#0b1326; --opt-hover:#111c34; --ring:0 0 0 3px rgba(124,58,237,.25);
+    --font-sans:"Space Grotesk","Outfit","Manrope",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
   }
   @media (prefers-color-scheme: light){
     :root{ --bg:#f7f9fc; --card:#fff; --ink:#0f172a; --muted:#64748b; --line:#e2e8f0; --opt:#f8fafc; --opt-hover:#eff6ff; }
   }
   *{box-sizing:border-box}
   html,body{height:100%}
-  body{
-    margin:0; font-family:var(--font-sans); color:var(--ink); background:
-      radial-gradient(1200px 800px at 10% -10%, rgba(124,58,237,.25), transparent 60%),
-      radial-gradient(1200px 800px at 110% 10%, rgba(34,211,238,.18), transparent 55%),
-      var(--bg);
-  }
-  .safe{padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}/* Header */ header{position:sticky;top:0;z-index:40;backdrop-filter:blur(10px) saturate(160%); background:linear-gradient(90deg,rgba(124,58,237,.20),rgba(34,211,238,.15)); border-bottom:1px solid var(--line)} .head{max-width:920px;margin:0 auto;padding:12px 0;display:flex;align-items:center;justify-content:space-between;gap:10px} .brand{display:flex;gap:10px;align-items:center} .logo{width:28px;height:28px;border-radius:8px;background:conic-gradient(from 220deg,#22d3ee,#3b82f6,#7c3aed);box-shadow:inset 0 0 0 1px rgba(255,255,255,.25)} h1{font-size:18px;line-height:1;margin:0;font-weight:800;letter-spacing:.2px} .chips{display:flex;gap:6px;align-items:center} .chip{font-size:11px;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.08);color:var(--ink);border:1px solid var(--line)} @media (max-width:420px){.chips{display:none}}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg)}
+  .safe{padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
 
-main{max-width:920px;margin:14px auto 92px} .card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 10px 30px rgba(2,12,27,.25);padding:14px} .screen{display:none}.screen.active{display:block}
+  /* Header */
+  header{position:sticky;top:0;z-index:40;backdrop-filter:blur(10px) saturate(160%);
+    background:linear-gradient(90deg,rgba(124,58,237,.20),rgba(34,211,238,.15));
+    border-bottom:1px solid var(--line)}
+  .head{max-width:920px;margin:0 auto;padding:12px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+  h1{margin:0;font-size:18px;font-weight:900;letter-spacing:.2px}
 
-/* Meta */ .meta{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;margin-bottom:10px} .badges{display:flex;gap:6px;align-items:center;flex-wrap:wrap} .badge{font-size:12px;padding:6px 8px;border-radius:10px;border:1px solid var(--line);color:var(--muted);background:rgba(255,255,255,.02)} .pct{font-size:12px;color:var(--muted);text-align:right} .progress{height:10px;background:#13203a;border-radius:999px;overflow:hidden} @media (prefers-color-scheme: light){.progress{background:#e6edf7}} .bar{height:100%;width:0;background:linear-gradient(90deg,var(--brand),#3b82f6 50%,var(--brand2))}
+  /* Layout */
+  main{max-width:920px;margin:14px auto 110px;padding:0 14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:0 10px 30px rgba(2,12,27,.25)}
+  .screen{display:none}.screen.active{display:block}
 
-/* Question */ .q{font-size:20px;line-height:1.35;font-weight:800;margin:8px 0 6px} .sub{color:var(--muted);font-size:13px;margin-bottom:6px}
+  /* Meta / progress */
+  .meta{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;margin-bottom:10px}
+  .metaRow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .badge{font-size:12px;padding:6px 8px;border-radius:10px;border:1px solid var(--line);color:var(--muted);background:rgba(255,255,255,.02);cursor:pointer}
+  .progress{height:10px;background:#13203a;border-radius:999px;overflow:hidden}
+  @media (prefers-color-scheme: light){.progress{background:#e6edf7}}
+  .bar{height:100%;width:0;background:linear-gradient(90deg,var(--brand),#3b82f6 50%,var(--brand2))}
+  .pct{font-size:12px;color:var(--muted);text-align:right}
 
-/* Options */ .options{display:grid;gap:10px;margin:12px 0} @media (min-width:640px){.options{grid-template-columns:1fr 1fr}} .opt{background:var(--opt);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;gap:12px;align-items:flex-start;min-height:60px;font-size:16px;line-height:1.35;text-align:left;cursor:pointer;transition:background .12s,transform .04s,box-shadow .12s;outline:none} .opt:hover{background:var(--opt-hover)} .opt:active{transform:scale(.996)} .opt:focus-visible{box-shadow:var(--ring)} .key{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-weight:900;background:#1f2a44;color:#e5e7eb} @media (prefers-color-scheme: light){.key{background:#e2e8f0;color:#111827}} .opt.correct{background:rgba(16,185,129,.12);border-color:#34d399} .opt.wrong{background:rgba(239,68,68,.12);border-color:#fca5a5} .opt.correct .key{background:#34d399} .opt.wrong .key{background:#f87171} .opt.disabled{opacity:.96;pointer-events:none}
+  /* Compact chooser button */
+  .mini{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.04);cursor:pointer}
+  .mini:active{transform:scale(.98)}
 
-.exp{display:none;margin-top:10px;border:1px dashed var(--line);border-radius:14px;padding:12px;background:rgba(255,255,255,.03)} .exp h3{margin:0 0 6px;font-size:14px;font-weight:800} .exp p{margin:0;font-size:15px;white-space:pre-wrap}
+  /* Question / options */
+  .q{font-size:20px;font-weight:900;margin:6px 0}
+  .options{display:grid;gap:10px;margin:12px 0}
+  @media (min-width:640px){.options{grid-template-columns:1fr 1fr}}
+  .opt{background:var(--opt);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;gap:12px;align-items:flex-start;cursor:pointer;transition:background .12s,transform .04s,box-shadow .12s}
+  .opt:hover{background:var(--opt-hover)}
+  .opt:active{transform:scale(.996)}
+  .opt.disabled{opacity:.96;pointer-events:none}
+  .key{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-weight:900;background:#1f2a44;color:#e5e7eb;flex:0 0 30px}
+  @media (prefers-color-scheme: light){.key{background:#e2e8f0;color:#111827}}
+  .opt.correct{background:rgba(16,185,129,.12);border-color:#34d399}
+  .opt.wrong{background:rgba(239,68,68,.12);border-color:#fca5a5}
+  .opt.correct .key{background:#34d399}
+  .opt.wrong .key{background:#f87171}
 
-/* Controls */ .controls{position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(11,16,32,.88);border-top:1px solid var(--line);backdrop-filter:blur(12px)} @media (prefers-color-scheme: light){.controls{background:rgba(255,255,255,.92)}} .controls .inner{max-width:920px;margin:0 auto;padding:10px 0} .row{display:flex;gap:10px;align-items:center;justify-content:space-between} .safeRow{padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))} button{font:inherit;padding:14px 16px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--ink);min-width:44px;min-height:44px;cursor:pointer;letter-spacing:.2px} .primary{background:linear-gradient(90deg,var(--brand),var(--brand2));border:1px solid rgba(124,58,237,.6);color:#fff;font-weight:900} .ghost{background:transparent} button:disabled{opacity:.55;cursor:not-allowed}
+  .exp{display:none;margin-top:10px;border:1px dashed var(--line);border-radius:14px;padding:12px;background:rgba(255,255,255,.03)}
 
-.toast{position:fixed;top:10px;left:50%;transform:translateX(-50%);background:#111827;color:#fff;padding:8px 12px;border-radius:999px;font-size:13px;opacity:0;transition:opacity .2s,transform .2s} .toast.show{opacity:1;transform:translateX(-50%) translateY(4px)}
+  /* Controls */
+  .controls{position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(11,16,32,.88);border-top:1px solid var(--line);backdrop-filter:blur(12px)}
+  @media (prefers-color-scheme: light){.controls{background:rgba(255,255,255,.92)}}
+  .controls .inner{max-width:920px;margin:0 auto;padding:10px;display:flex;justify-content:space-between;gap:10px}
+  button{font:inherit;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+  .primary{background:linear-gradient(90deg,var(--brand),var(--brand2));color:#fff;font-weight:800}
+  .ghost{background:transparent}
 
-/* Reduce motion */ @media (prefers-reduced-motion: reduce){.opt:active{transform:none}.toast{transition:none}} </style>
+  .error{display:none;margin:8px 0 0;padding:10px;border-radius:10px;background:rgba(239,68,68,.12);border:1px solid #fca5a5;color:#fecaca;font-size:14px}
+  .muted{color:var(--muted);font-size:14px}
 
+  /* Modal chooser */
+  .overlay{position:fixed;inset:0;background:rgba(2,12,27,.5);backdrop-filter:blur(4px);display:none;z-index:70}
+  .overlay.show{display:block}
+  .modal{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(92vw,520px);max-height:min(80vh,640px);background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,.35);display:flex;flex-direction:column}
+  .modalHeader{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-bottom:1px solid var(--line)}
+  .modalTitle{font-weight:900}
+  .grid{padding:12px;display:grid;grid-template-columns:repeat(6,1fr);gap:8px;overflow:auto}
+  @media (min-width:520px){.grid{grid-template-columns:repeat(8,1fr)}}
+  .qbtn{height:38px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:13px;cursor:pointer}
+  .qbtn.attempted{background:var(--brand);color:#fff}
+  .qbtn.current{outline:2px solid var(--brand2)}
+</style>
 </head>
 <body>
   <header>
     <div class="head safe">
-      <div class="brand"><div class="logo" aria-hidden="true"></div><h1>My Quiz</h1></div>
-      <div class="chips">
-        <span class="chip">A/B/C/D</span>
-        <span class="chip">Enter/→ Next</span>
-        <span class="chip">← Prev</span>
-      </div>
+      <h1>Anatomy Quiz</h1>
     </div>
-  </header>  <main class="safe">
-    <!-- Intro -->
+  </header>
+
+  <main>
+    <!-- Intro / loader with fallback file picker (only shows if needed) -->
     <section id="intro" class="card screen active" aria-live="polite">
-      <div style="font-weight:800;margin-bottom:6px">Loading questions…</div>
-      <div style="color:var(--muted);font-size:14px">Place your JSON next to this file and ensure <code>QUESTIONS_URL</code> points to it.</div>
-    </section><!-- Quiz -->
-<section id="quiz" class="card screen" aria-labelledby="qLabel">
-  <div class="meta">
-    <div class="badges">
-      <span id="metaIdx" class="badge">Q 1/1</span>
-      <span id="metaScore" class="badge">Score 0</span>
-      <span id="metaTime" class="badge">00:00</span>
-    </div>
-    <div class="pct" id="pct">0%</div>
-  </div>
-  <div class="progress" aria-hidden="true"><div id="bar" class="bar"></div></div>
+      <div style="font-weight:900;margin-bottom:6px">Loading questions…</div>
+      <div class="muted">Expected file: <code>quiz_questions_from_pdf.json</code> next to this HTML. If you're opening via <code>file://</code> or the fetch fails, use the button below.</div>
+      <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+        <button id="pickBtn" class="ghost">Select questions JSON</button>
+        <input id="fileInput" type="file" accept="application/json" style="display:none" />
+      </div>
+      <div id="introErr" class="error"></div>
+    </section>
 
-  <h2 id="qLabel" class="q">—</h2>
-  <div id="qSub" class="sub"></div>
-
-  <div id="optBox" class="options" role="group" aria-label="Options"></div>
-
-  <div id="exp" class="exp" aria-live="polite" aria-atomic="true">
-    <h3>Explanation</h3>
-    <p id="expText"></p>
-  </div>
-</section>
-
-<!-- Result -->
-<section id="done" class="card screen">
-  <div style="text-align:center;padding:16px 6px">
-    <div style="color:var(--muted);font-size:14px">Finished</div>
-    <div id="finalScore" style="font-size:34px;font-weight:900;margin:6px 0">—</div>
-    <div id="finalMeta" style="color:var(--muted);font-size:14px">—</div>
-    <div style="margin-top:12px;display:flex;gap:10px;justify-content:center">
-      <button id="restart2" class="primary">Restart</button>
-    </div>
-  </div>
-</section>
-
-  </main>  <!-- Sticky controls -->  <nav class="controls">
-    <div class="inner">
-      <div class="row safeRow">
-        <button id="prevBtn" class="ghost">◀ Prev</button>
-        <div style="display:flex;gap:10px">
-          <button id="restartBtn" class="ghost">Restart</button>
-          <button id="nextBtn" class="primary" disabled>Next ▶</button>
+    <!-- Quiz screen -->
+    <section id="quiz" class="card screen" aria-labelledby="qLabel">
+      <div class="meta">
+        <div class="metaRow">
+          <span id="metaIdx" class="badge" title="Tap to jump">Q 1/1</span>
+          <span id="metaScore" class="badge">Score 0</span>
         </div>
+        <div class="progress" aria-hidden="true"><div id="bar" class="bar"></div></div>
+        <button id="openChooser" class="mini" title="Choose question" aria-label="Choose question">#</button>
+      </div>
+      <div class="pct" id="pct" style="margin:-6px 0 8px">0%</div>
+
+      <h2 id="qLabel" class="q">—</h2>
+      <div id="optBox" class="options" role="group" aria-label="Options"></div>
+      <div id="exp" class="exp" aria-live="polite" aria-atomic="true"><strong>Explanation</strong><div id="expText" class="muted" style="margin-top:6px"></div></div>
+      <div id="quizErr" class="error"></div>
+    </section>
+
+    <!-- Final score -->
+    <section id="done" class="card screen">
+      <div style="text-align:center;padding:16px">
+        <div id="finalScore" style="font-size:28px;font-weight:900">—</div>
+        <div id="finalMeta" class="muted"></div>
+        <div style="margin-top:12px"><button id="restart2" class="primary">Restart</button></div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="controls" aria-label="Navigation">
+    <div class="inner safe">
+      <button id="prevBtn" class="ghost" aria-label="Previous question">◀ Prev</button>
+      <div style="display:flex;gap:8px">
+        <button id="restartBtn" class="ghost" aria-label="Restart quiz">Restart</button>
+        <button id="nextBtn" class="primary" disabled aria-label="Next question">Next ▶</button>
       </div>
     </div>
-  </nav>  <div id="toast" class="toast" role="status" aria-live="polite"></div><script>
-/******** CONFIG ********/ 
+  </nav>
+
+  <!-- Hidden modal chooser -->
+  <div id="chooser" class="overlay" role="dialog" aria-modal="true" aria-labelledby="chooserTitle">
+    <div class="modal">
+      <div class="modalHeader">
+        <div id="chooserTitle" class="modalTitle">Choose Question</div>
+        <button id="closeChooser" class="mini" aria-label="Close">✕</button>
+      </div>
+      <div id="grid" class="grid" role="listbox" aria-label="Question list"></div>
+    </div>
+  </div>
+
+<script>
+'use strict';
+/* ===== CONFIG ===== */
 const QUESTIONS_URL = 'quiz_questions_from_pdf.json';
 
-/******** DOM ********/
-const $ = s => document.querySelector(s);
-const intro = $('#intro'), quiz = $('#quiz'), done = $('#done');
-const metaIdx = $('#metaIdx'), metaScore = $('#metaScore'), metaTime = $('#metaTime');
-const bar = $('#bar'), pct = $('#pct');
-const qLabel = $('#qLabel'), qSub = $('#qSub'), optBox = $('#optBox');
-const exp = $('#exp'), expText = $('#expText');
-const prevBtn = $('#prevBtn'), nextBtn = $('#nextBtn'), restartBtn = $('#restartBtn'), restart2 = $('#restart2');
-const toast = $('#toast');
+/* ===== DOM ===== */
+const $ = (s)=>document.querySelector(s);
+const intro=$('#intro'), quiz=$('#quiz'), done=$('#done');
+const introErr=$('#introErr'), quizErr=$('#quizErr');
+const pickBtn=$('#pickBtn'), fileInput=$('#fileInput');
+const metaIdx=$('#metaIdx'), metaScore=$('#metaScore');
+const bar=$('#bar'), pct=$('#pct');
+const qLabel=$('#qLabel'), optBox=$('#optBox');
+const exp=$('#exp'), expText=$('#expText');
+const prevBtn=$('#prevBtn'), nextBtn=$('#nextBtn'), restartBtn=$('#restartBtn'), restart2=document.getElementById('restart2');
+const openChooser=$('#openChooser'), chooser=$('#chooser'), closeChooser=$('#closeChooser'), grid=$('#grid');
 
-/******** STATE ********/
-let BANK = [];
-let i = 0, score = 0;
-let startedAt = 0, ticker = null;
+/* ===== STATE ===== */
+const State = { bank: [], index: 0, score: 0, startedAt: 0 };
 
-/******** LOAD ********/
+/* ===== STARTUP ===== */
 (async function boot(){
-  try{
-    const res = await fetch(QUESTIONS_URL, {cache:'no-store'});
-    if(!res.ok) throw new Error(`${res.status} ${res.statusText}`);
-    const raw = await res.json();
-    BANK = raw.map(normalize);
-    startedAt = Date.now(); startTimer();
-    show(quiz); render();
-  }catch(err){
-    intro.innerHTML = `
-      <div style="color:#f87171;font-weight:800;margin-bottom:6px">Failed to load ${escapeHTML(QUESTIONS_URL)}</div>
-      <div style="color:var(--muted)">Reason: ${escapeHTML(err.message||String(err))}</div>
-    `;
+  const isFile = location.protocol === 'file:';
+  if(!isFile){
+    try{ await loadFromUrl(QUESTIONS_URL); show(quiz); render(); return; }
+    catch(e){ show(intro); introErr.style.display='block'; introErr.textContent = 'Auto-load failed: '+ (e.message||e); }
   }
+  show(intro);
 })();
 
+/* ===== LOADERS ===== */
+async function loadFromUrl(url){
+  const res = await fetch(url, { cache:'no-store' });
+  if(!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+  const raw = await res.json();
+  State.bank = raw.map(normalize);
+  State.startedAt = Date.now();
+}
+function loadFromObject(obj){
+  State.bank = obj.map(normalize);
+  State.startedAt = Date.now();
+}
+
+/* File picker fallback */
+if(pickBtn && fileInput){
+  pickBtn.addEventListener('click', ()=> fileInput.click());
+  fileInput.addEventListener('change', async (e)=>{
+    const f = e.target.files && e.target.files[0];
+    if(!f) return;
+    try{
+      const text = await f.text();
+      const data = JSON.parse(text);
+      loadFromObject(data);
+      show(quiz); render();
+    }catch(err){ introErr.style.display='block'; introErr.textContent = 'Invalid JSON: ' + (err.message||String(err)); }
+  });
+}
+
+/* ===== NORMALIZE ===== */
 function normalize(x, idx){
   const letters = ['A','B','C','D','E','F','G','H'];
   const q = String(x.question ?? '').trim();
   let options = [];
   if(Array.isArray(x.options)){
     options = x.options.map((t,n)=>({ key: letters[n]||String.fromCharCode(65+n), text: String(t??'').trim() }));
-  }else if(x.options && typeof x.options==='object'){
-    options = letters.filter(k=>x.options[k]!=null).map(k=>({ key:k, text:String(x.options[k]).trim() }));
+  } else if (x.options && typeof x.options === 'object'){
+    options = letters.filter(k => x.options[k] != null).map(k => ({ key:k, text:String(x.options[k]).trim() }));
+  } else {
+    options = letters.filter(k => x[k] != null).map(k => ({ key:k, text:String(x[k]).trim() }));
   }
-  const answerKey = String(x.answerKey ?? '').trim().toUpperCase();
+  let answerKey = String(x.answerKey ?? x.answer ?? '').trim().toUpperCase();
+  if(!answerKey && Number.isInteger(x.answerIndex)){
+    const k = letters[x.answerIndex]; if(k) answerKey = k;
+  }
   const explanation = String(x.explanation ?? '').trim();
-  const correctIndex = options.findIndex(o => o.key.toUpperCase()===answerKey);
-  return { id:x.id ?? idx+1, question:q, subtitle:String(x.subtitle??'').trim(), options, answerKey, correctIndex, explanation, userChoice:null, evaluated:false };
+  return { id: x.id ?? idx+1, question:q, options, answerKey, explanation, evaluated:false, userChoice:null };
 }
 
-/******** RENDER ********/
+/* ===== RENDER ===== */
 function render(){
-  const total = BANK.length;
-  if(!total){ qLabel.textContent='No questions found.'; optBox.innerHTML=''; nextBtn.disabled=true; return; }
+  const total = State.bank.length; if(!total){ return; }
+  const i = State.index; const q = State.bank[i];
 
-  const q = BANK[i];
-
-  // Meta & progress
+  // meta + progress
   metaIdx.textContent = `Q ${i+1}/${total}`;
-  metaScore.textContent = `Score ${score}`;
+  metaScore.textContent = `Score ${State.score}`;
   const progress = Math.round((i/Math.max(1,total))*100);
   bar.style.width = progress + '%';
   pct.textContent = progress + '%';
 
-  // Question
+  // question text
   qLabel.textContent = q.question || '—';
-  qSub.textContent = q.subtitle || '';
 
-  // Options
+  // options
   optBox.innerHTML = '';
+  if(!q.options || !q.options.length){ quizErr.style.display='block'; quizErr.textContent='No options found for this item.'; }
+  else { quizErr.style.display='none'; }
   q.options.forEach(o=>{
     const btn = document.createElement('button');
-    btn.className = 'opt';
-    btn.setAttribute('data-key', o.key);
-    btn.setAttribute('aria-label', `${o.key}. ${o.text}`);
-    btn.innerHTML = `<span class="key">${o.key}</span><div class="txt">${escapeHTML(o.text)}</div>`;
-    btn.addEventListener('click', ()=>choose(o.key));
+    btn.className = 'opt'; btn.dataset.key = o.key;
+    btn.innerHTML = `<span class="key">${o.key}</span><div>${escapeHTML(o.text)}</div>`;
+    btn.addEventListener('click', ()=> choose(o.key));
     optBox.appendChild(btn);
   });
 
-  if(q.evaluated){
-    decorate(q);
-    lockOptions(true);
-    showExplanation(q);
-    nextBtn.disabled = false;
-  }else{
-    lockOptions(false);
-    hideExplanation();
-    nextBtn.disabled = true;
-  }
+  if(q.evaluated){ decorate(q); showExp(q); setDisabled(true); nextBtn.disabled = false; }
+  else { hideExp(); setDisabled(false); nextBtn.disabled = true; }
+
   prevBtn.disabled = (i===0);
+
+  // Rebuild modal grid lazily to reflect attempt states
+  buildGrid();
 }
 
+/* ===== Modal grid ===== */
+function buildGrid(){
+  grid.innerHTML = '';
+  State.bank.forEach((q, idx)=>{
+    const b = document.createElement('button');
+    b.className = 'qbtn'; b.textContent = idx+1; b.setAttribute('role','option');
+    if(q.evaluated) b.classList.add('attempted');
+    if(idx===State.index) b.classList.add('current');
+    b.addEventListener('click', ()=>{ State.index = idx; render(); hideChooser(); });
+    grid.appendChild(b);
+  });
+}
+function showChooser(){ chooser.classList.add('show'); }
+function hideChooser(){ chooser.classList.remove('show'); }
+openChooser.addEventListener('click', showChooser);
+closeChooser.addEventListener('click', hideChooser);
+chooser.addEventListener('click', (e)=>{ if(e.target===chooser) hideChooser(); });
+
+/* Clicking the "Q 1/182" badge still supports jump via prompt */
+metaIdx.addEventListener('click', ()=>{
+  const total = State.bank.length;
+  const val = prompt(`Go to question (1–${total})`);
+  if(!val) return;
+  const n = Math.max(1, Math.min(total, parseInt(val,10)||1));
+  State.index = n-1; render();
+});
+
+/* ===== ANSWER FLOW ===== */
 function choose(key){
-  const q = BANK[i];
-  if(q.evaluated) return;
-  q.userChoice = String(key||'').toUpperCase();
-  q.evaluated = true;
-
-  if(q.userChoice === q.answerKey){
-    score++;
-    metaScore.textContent = `Score ${score}`;
-    ping('✅ Correct');
-  }else{
-    ping('✖ Wrong');
-  }
-
-  decorate(q);
-  lockOptions(true);
-  showExplanation(q);
-  nextBtn.disabled = false;
-  exp.scrollIntoView({block:'nearest', behavior:'smooth'});
+  const q = State.bank[State.index]; if(q.evaluated) return;
+  q.userChoice = String(key||'').toUpperCase(); q.evaluated = true;
+  if(q.userChoice === q.answerKey) State.score++;
+  decorate(q); showExp(q); setDisabled(true); nextBtn.disabled = false;
+  exp.scrollIntoView({behavior:'smooth', block:'nearest'});
 }
 
 function decorate(q){
@@ -228,92 +314,38 @@ function decorate(q){
     if(k === q.userChoice && q.userChoice !== q.answerKey) b.classList.add('wrong');
   });
 }
+function setDisabled(state){ optBox.querySelectorAll('.opt').forEach(b=>{ b.disabled=!!state; b.classList.toggle('disabled', !!state); }); }
+function showExp(q){ if(q.explanation){ exp.style.display='block'; expText.textContent = q.explanation; } else { hideExp(); } }
+function hideExp(){ exp.style.display='none'; expText.textContent=''; }
 
-function lockOptions(state){
-  optBox.querySelectorAll('.opt').forEach(b=>{
-    b.classList.toggle('disabled', !!state);
-    b.disabled = !!state;
-  });
-}
+/* ===== NAV ===== */
+function next(){ if(State.index < State.bank.length-1){ State.index++; render(); } else { finish(); } }
+function prev(){ if(State.index>0){ State.index--; render(); } }
+function restart(){ State.bank = State.bank.map(q=>({ ...q, evaluated:false, userChoice:null })); State.index=0; State.score=0; show(quiz); render(); }
+function finish(){ show(done); const total = State.bank.length; const acc = total? Math.round((State.score/total)*100):0; $('#finalScore').textContent = `You scored ${State.score}/${total}`; $('#finalMeta').textContent = `Accuracy ${acc}%`; }
 
-function showExplanation(q){
-  if(q.explanation){
-    exp.style.display='block';
-    expText.textContent = q.explanation;
-  }else{
-    hideExplanation();
-  }
-}
-function hideExplanation(){ exp.style.display='none'; expText.textContent='' }
-
-/******** NAV ********/
-function next(){ if(i < BANK.length-1){ i++; render(); } else { finish(); } }
-function prev(){ if(i>0){ i--; render(); } }
-
-function finish(){
-  stopTimer();
-  show(done);
-  const total = BANK.length;
-  const acc = total ? Math.round((score/total)*100) : 0;
-  const t = formatTime((Date.now()-startedAt)/1000);
-  $('#finalScore').textContent = `You scored ${score} / ${total}`;
-  $('#finalMeta').textContent = `Accuracy ${acc}% • Time ${t}`;
-}
-
-function restart(){
-  BANK = BANK.map(q=>({...q, userChoice:null, evaluated:false}));
-  i = 0; score = 0;
-  startedAt = Date.now(); restartTimer();
-  show(quiz); render();
-}
-
-/******** UTIL ********/
+/* ===== UTIL ===== */
 function show(el){ [intro,quiz,done].forEach(s=>s.classList.remove('active')); el.classList.add('active'); }
 function escapeHTML(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
-function ping(msg){ toast.textContent = msg; toast.classList.add('show'); clearTimeout(ping._t); ping._t=setTimeout(()=>toast.classList.remove('show'), 900); }
 
-/* Timer */
-function startTimer(){ tick(); ticker=setInterval(tick,1000); }
-function restartTimer(){ clearInterval(ticker); startTimer(); }
-function stopTimer(){ clearInterval(ticker); }
-function tick(){ const s=Math.max(0,Math.floor((Date.now()-startedAt)/1000)); metaTime.textContent = formatTime(s); }
-function formatTime(s){ const m=Math.floor(s/60), sec=s%60; return `${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`; }
-
-/******** EVENTS ********/
+/* Buttons */
 nextBtn.addEventListener('click', next);
 prevBtn.addEventListener('click', prev);
 restartBtn.addEventListener('click', restart);
 restart2?.addEventListener('click', restart);
 
+/* Keyboard */
 window.addEventListener('keydown', (e)=>{
-  const inQuiz = quiz.classList.contains('active');
-  if(!inQuiz) return;
-  const q = BANK[i];
-  const key = e.key.toUpperCase();
-  const letters=['A','B','C','D','E','F','G','H'];
-  if(letters.includes(key) && !q?.evaluated){
-    const btn = Array.from(optBox.querySelectorAll('.opt')).find(b => (b.dataset.key||'').toUpperCase()===key);
+  if(!quiz.classList.contains('active')) return;
+  const q = State.bank[State.index];
+  const k = e.key.toUpperCase();
+  const letters = ['A','B','C','D','E','F','G','H'];
+  if(letters.includes(k) && !q?.evaluated){
+    const btn = Array.from(optBox.querySelectorAll('.opt')).find(b => (b.dataset.key||'').toUpperCase()===k);
     if(btn) btn.click();
-  }else if((e.key==='Enter'||e.key==='ArrowRight') && q?.evaluated){ next(); }
+  } else if((e.key==='Enter'||e.key==='ArrowRight') && q?.evaluated){ next(); }
   else if(e.key==='ArrowLeft'){ prev(); }
 });
-
-/* Touch swipe */
-let touchX=null, touchY=null, swiped=false;
-function touchStart(e){ const t=e.changedTouches[0]; touchX=t.clientX; touchY=t.clientY; swiped=false; }
-function touchMove(e){
-  if(touchX===null) return;
-  const t=e.changedTouches[0], dx=t.clientX - touchX, dy=t.clientY - touchY;
-  if(Math.abs(dx)>24 && Math.abs(dy)<32 && !swiped){
-    swiped=true; const q=BANK[i];
-    if(dx<-24){ if(q?.evaluated) next(); }
-    else if(dx>24){ prev(); }
-  }
-}
-function touchEnd(){ touchX=null; touchY=null; swiped=false; }
-
-document.addEventListener('touchstart', touchStart, {passive:true});
-document.addEventListener('touchmove', touchMove, {passive:true});
-document.addEventListener('touchend', touchEnd, {passive:true});
-</script></body>
+</script>
+</body>
 </html>

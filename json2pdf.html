@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Q-Bank Book Renderer</title>
+<style>
+  :root{
+    --ink:#111827; --muted:#6b7280; --accent:#2563eb; --ok:#059669; --bg:#f8fafc;
+    --card:#ffffff; --border:#e5e7eb; --warn:#dc2626;
+  }
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;}
+  header{position:sticky;top:0;background:linear-gradient(#fff,#fffcc0 0%,#fff 45%);border-bottom:1px solid var(--border);z-index:5}
+  .wrap{max-width:900px;margin:0 auto;padding:16px}
+  h1{margin:0 0 8px;font-size:22px}
+  .controls{display:grid;grid-template-columns:1fr;gap:12px;margin:12px 0}
+  .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  input[type="text"], textarea{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:#fff}
+  textarea{min-height:120px;resize:vertical}
+  .btn{appearance:none;border:1px solid var(--border);background:#fff;border-radius:10px;padding:10px 14px;cursor:pointer}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+  .btn.ghost{background:transparent}
+  .meta{font-size:13px;color:var(--muted)}
+  .toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin:6px 0 0}
+  .toolbar .left,.toolbar .right{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .toggle{display:inline-flex;gap:6px;align-items:center;font-size:14px}
+  .counter{font-size:14px;color:var(--muted)}
+  .search{min-width:240px}
+
+  /* Book area */
+  .book{max-width:900px;margin:20px auto;padding:0 16px 40px}
+  .title-page{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin:8px 0 18px;break-inside:avoid;page-break-inside:avoid}
+  .title-page h2{margin:0 0 6px}
+  .title-page .small{color:var(--muted);font-size:14px}
+
+  .qcard{
+    background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 18px;margin:14px 0;
+    break-inside:avoid; page-break-inside:avoid;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.02);
+  }
+  .qhead{display:flex;gap:8px;align-items:baseline;justify-content:space-between;margin-bottom:8px}
+  .qnum{font-weight:700}
+  .qid{font-size:12px;color:var(--muted)}
+  .question{font-weight:600}
+  .options{margin:10px 0 0;padding:0;list-style:none}
+  .opt{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--border);border-radius:12px;padding:10px 12px;margin:8px 0}
+  .opt .key{flex:0 0 auto;font-weight:700;min-width:22px;text-align:center}
+  .opt.correct{border-color:#d1fae5;background:#f0fdf4}
+  .answerline{margin-top:8px;font-weight:600}
+  .answerline .badge{display:inline-block;background:#eef2ff;color:#3730a3;border-radius:999px;padding:2px 10px;font-size:12px}
+  .explain{margin-top:10px;border-left:4px solid #e0e7ff;background:#f8fafc;padding:10px 12px;border-radius:8px}
+  .hidden{display:none !important}
+
+  /* Print styling */
+  @media print{
+    header, .controls, .toolbar{display:none !important}
+    body{background:#fff}
+    .book{padding:0}
+    .qcard{box-shadow:none;border:1px solid #e5e7eb;margin:10px 0;break-inside:avoid}
+    .title-page{border:none}
+    a[href]:after{content:""}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Q-Bank Book Renderer</h1>
+    <div class="controls">
+      <div class="row">
+        <textarea id="pasteArea" placeholder="Paste your JSON array here (e.g., [{...}, {...}, ...])"></textarea>
+      </div>
+      <div class="row">
+        <input id="urlInput" class="search" type="text" placeholder="Or load JSON from URL (must allow CORS)" />
+        <input id="fileInput" type="file" accept=".json,application/json" />
+        <button class="btn" id="loadUrlBtn">Load from URL</button>
+        <button class="btn" id="loadFileBtn">Load File</button>
+        <button class="btn primary" id="renderBtn">Render Q-Bank</button>
+      </div>
+      <div class="toolbar">
+        <div class="left">
+          <input id="filterInput" class="search" type="text" placeholder="Filter by keyword..." />
+          <label class="toggle"><input type="checkbox" id="toggleExplain" checked /> Show explanations</label>
+        </div>
+        <div class="right">
+          <span class="counter" id="countLabel">0 questions</span>
+          <button class="btn" id="printBtn">Print / Save PDF</button>
+          <span class="meta">No question will be split across pages when printing.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="book" id="book">
+  <section class="title-page">
+    <h2 id="bookTitle">Question Bank</h2>
+    <div class="small" id="bookMeta">Load your JSON to begin.</div>
+    <p class="small">Format expected for each item:
+      <code>{
+        "id": 261,
+        "question": "…",
+        "options": {"A":"…","B":"…","C":"…","D":"…"},
+        "answerKey": "B",
+        "correctIndex": 1,
+        "explanation": "…"
+      }</code>
+    </p>
+  </section>
+  <div id="qContainer"></div>
+</main>
+
+<script>
+(() => {
+  const pasteArea = document.getElementById('pasteArea');
+  const fileInput = document.getElementById('fileInput');
+  const loadFileBtn = document.getElementById('loadFileBtn');
+  const urlInput = document.getElementById('urlInput');
+  const loadUrlBtn = document.getElementById('loadUrlBtn');
+  const renderBtn = document.getElementById('renderBtn');
+  const qContainer = document.getElementById('qContainer');
+  const toggleExplain = document.getElementById('toggleExplain');
+  const filterInput = document.getElementById('filterInput');
+  const countLabel = document.getElementById('countLabel');
+  const printBtn = document.getElementById('printBtn');
+  const bookTitle = document.getElementById('bookTitle');
+  const bookMeta  = document.getElementById('bookMeta');
+
+  let allQuestions = [];   // full dataset
+  let shownQuestions = []; // filtered dataset
+
+  function normalizeData(data) {
+    // Accept either an array or single object
+    let arr = Array.isArray(data) ? data : [data];
+    // Ensure stable ordering by id then by question if id missing
+    arr = arr.slice().sort((a,b) => {
+      if (a.id != null && b.id != null) return a.id - b.id;
+      if (a.id != null) return -1;
+      if (b.id != null) return 1;
+      return (a.question||"").localeCompare(b.question||"");
+    });
+    // Normalize options to an array of {key,text,isCorrect}
+    return arr.map((item, idx) => {
+      const qid = item.id ?? (idx + 1);
+      const q = (item.question || "").toString().trim();
+      const optsObj = item.options || {};
+      const keys = Object.keys(optsObj);
+      const normalized = keys.map((k, i) => ({
+        key: k,
+        text: (optsObj[k] ?? "").toString(),
+        idx: i
+      }));
+      let answerKey = item.answerKey;
+      if (!answerKey && typeof item.correctIndex === 'number' && normalized[item.correctIndex]) {
+        answerKey = normalized[item.correctIndex].key;
+      }
+      // mark correct
+      normalized.forEach(o => { o.correct = (answerKey && (o.key === answerKey)); });
+      return {
+        id: qid,
+        question: q,
+        options: normalized,
+        answerKey: answerKey || null,
+        explanation: (item.explanation || "").toString().trim()
+      };
+    });
+  }
+
+  function escapeHTML(s){
+    return s.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+  }
+
+  function render(questions) {
+    qContainer.innerHTML = "";
+    countLabel.textContent = `${questions.length} question${questions.length===1?"":"s"}`;
+    questions.forEach((item, i) => {
+      const card = document.createElement('article');
+      card.className = 'qcard';
+
+      const head = document.createElement('div');
+      head.className = 'qhead';
+      head.innerHTML = `
+        <div>
+          <div class="qnum">Q${i+1}${item.id ? ` <span class="qid">(#${escapeHTML(String(item.id))})</span>` : ''}</div>
+          <div class="question">${escapeHTML(item.question)}</div>
+        </div>
+      `;
+      card.appendChild(head);
+
+      const ul = document.createElement('ul');
+      ul.className = 'options';
+
+      item.options.forEach(opt => {
+        const li = document.createElement('li');
+        li.className = 'opt' + (opt.correct ? ' correct' : '');
+        li.innerHTML = `
+          <span class="key">${escapeHTML(opt.key)}</span>
+          <div class="text">${escapeHTML(opt.text)}</div>
+        `;
+        ul.appendChild(li);
+      });
+      card.appendChild(ul);
+
+      const answerText = item.answerKey ? `Answer: ${escapeHTML(item.answerKey)}` : 'Answer: —';
+      const ans = document.createElement('div');
+      ans.className = 'answerline';
+      ans.innerHTML = `<span class="badge">${answerText}</span>`;
+      card.appendChild(ans);
+
+      if (item.explanation) {
+        const ex = document.createElement('div');
+        ex.className = 'explain';
+        ex.textContent = item.explanation;
+        if (!toggleExplain.checked) ex.classList.add('hidden');
+        card.appendChild(ex);
+      } else {
+        // If explanations are globally hidden, keep consistent spacing—no block added if empty.
+      }
+
+      qContainer.appendChild(card);
+    });
+  }
+
+  function applyFilter() {
+    const term = filterInput.value.trim().toLowerCase();
+    if (!term) {
+      shownQuestions = allQuestions.slice();
+    } else {
+      shownQuestions = allQuestions.filter(q => {
+        const inQ = q.question.toLowerCase().includes(term);
+        const inExp = q.explanation.toLowerCase().includes(term);
+        const inOpts = q.options.some(o => o.text.toLowerCase().includes(term) || o.key.toLowerCase() === term);
+        return inQ || inExp || inOpts;
+      });
+    }
+    render(shownQuestions);
+  }
+
+  // Event handlers
+  toggleExplain.addEventListener('change', () => {
+    document.querySelectorAll('.explain').forEach(el => {
+      toggleExplain.checked ? el.classList.remove('hidden') : el.classList.add('hidden');
+    });
+  });
+
+  filterInput.addEventListener('input', applyFilter);
+
+  renderBtn.addEventListener('click', () => {
+    const raw = pasteArea.value.trim();
+    if (!raw) {
+      alert("Paste your JSON first, or load via File/URL.");
+      return;
+    }
+    try {
+      const data = JSON.parse(raw);
+      allQuestions = normalizeData(data);
+      shownQuestions = allQuestions.slice();
+      bookTitle.textContent = "Question Bank";
+      bookMeta.textContent = `Rendered ${allQuestions.length} items • ${new Date().toLocaleString()}`;
+      render(shownQuestions);
+      window.scrollTo({top: document.querySelector('.book').offsetTop - 20, behavior: 'smooth'});
+    } catch (e) {
+      console.error(e);
+      alert("Invalid JSON. Please check the format.");
+    }
+  });
+
+  loadFileBtn.addEventListener('click', () => {
+    if (!fileInput.files || !fileInput.files[0]) {
+      fileInput.click();
+      return;
+    }
+    const f = fileInput.files[0];
+    const reader = new FileReader();
+    reader.onload = () => { pasteArea.value = reader.result; };
+    reader.readAsText(f);
+  });
+
+  fileInput.addEventListener('change', () => {
+    if (!fileInput.files || !fileInput.files[0]) return;
+    const f = fileInput.files[0];
+    const reader = new FileReader();
+    reader.onload = () => { pasteArea.value = reader.result; };
+    reader.readAsText(f);
+  });
+
+  loadUrlBtn.addEventListener('click', async () => {
+    const url = urlInput.value.trim();
+    if (!url) { alert("Enter a JSON URL."); return; }
+    try {
+      const res = await fetch(url, {cache:'no-store'});
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      pasteArea.value = JSON.stringify(data, null, 2);
+      // Do not auto-render; let user click Render so they can tweak if needed.
+    } catch (e) {
+      console.error(e);
+      alert("Failed to fetch JSON from URL. Check CORS or the URL content.");
+    }
+  });
+
+  printBtn.addEventListener('click', () => window.print());
+
+  // Demo (optional): uncomment to see one example render quickly.
+  /*
+  pasteArea.value = JSON.stringify([{
+    "id": 261,
+    "question": "Which structure forms the floor of the fourth ventricle?",
+    "options": {
+      "A": "Dorsal surface of cerebellum",
+      "B": "Dorsal surface of pons and medulla",
+      "C": "Cerebral peduncles",
+      "D": "Thalamus"
+    },
+    "answerKey": "B",
+    "correctIndex": 1,
+    "explanation": "The floor of the fourth ventricle (rhomboid fossa) is formed by the dorsal surfaces of the pons and medulla."
+  }], null, 2);
+  */
+})();
+</script>
+</body>
+</html>
