@@ -65,6 +65,22 @@
 
   .exp{display:none;margin-top:10px;border:1px dashed var(--line);border-radius:14px;padding:12px;background:rgba(255,255,255,.03)}
 
+  /* Leaderboard */
+  .leaderboard{margin-top:18px;border-top:1px solid var(--line);padding-top:18px;display:flex;flex-direction:column;gap:12px}
+  .leaderboardHeader{display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .leaderboardHeader h3{margin:0;font-size:18px;font-weight:800}
+  .leaderboardForm{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .leaderboardForm label{font-weight:600;font-size:14px}
+  .leaderboardForm input{flex:1 1 180px;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+  .leaderboardForm button{padding:10px 14px}
+  .leaderboardList{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+  .leaderboardItem{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--opt);font-size:14px}
+  .leaderboardDetails{display:flex;flex-direction:column;gap:4px}
+  .leaderboardStats{font-weight:600}
+  .leaderboardMeta{font-size:12px;color:var(--muted)}
+  .leaderboard.collapsed #leaderboardBody{display:none}
+  .small{padding:8px 12px;font-size:13px}
+
   /* Controls */
   .controls{position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(11,16,32,.88);border-top:1px solid var(--line);backdrop-filter:blur(12px)}
   @media (prefers-color-scheme: light){.controls{background:rgba(255,255,255,.92)}}
@@ -128,10 +144,26 @@
 
     <!-- Final score -->
     <section id="done" class="card screen">
-      <div style="text-align:center;padding:16px">
-        <div id="finalScore" style="font-size:28px;font-weight:900">—</div>
-        <div id="finalMeta" class="muted"></div>
-        <div style="margin-top:12px"><button id="restart2" class="primary">Restart</button></div>
+      <div style="padding:16px;display:flex;flex-direction:column;gap:20px">
+        <div style="text-align:center">
+          <div id="finalScore" style="font-size:28px;font-weight:900">—</div>
+          <div id="finalMeta" class="muted"></div>
+          <div style="margin-top:12px"><button id="restart2" class="primary">Restart</button></div>
+        </div>
+        <div id="leaderboard" class="leaderboard" aria-live="polite">
+          <div class="leaderboardHeader">
+            <h3>Leaderboard</h3>
+            <button id="toggleLeaderboard" class="ghost small" type="button">Hide</button>
+          </div>
+          <div id="leaderboardBody">
+            <div class="leaderboardForm">
+              <label for="playerName">Your name</label>
+              <input id="playerName" name="playerName" type="text" placeholder="Enter your name" autocomplete="name" maxlength="40" />
+              <button id="saveScore" class="primary small" type="button">Save Score</button>
+            </div>
+            <ol id="leaderboardList" class="leaderboardList"></ol>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -171,11 +203,173 @@ const metaIdx=$('#metaIdx'), metaScore=$('#metaScore');
 const bar=$('#bar'), pct=$('#pct');
 const qLabel=$('#qLabel'), optBox=$('#optBox');
 const exp=$('#exp'), expText=$('#expText');
+const finalScoreEl=$('#finalScore'), finalMetaEl=$('#finalMeta');
 const prevBtn=$('#prevBtn'), nextBtn=$('#nextBtn'), restartBtn=$('#restartBtn'), restart2=document.getElementById('restart2');
 const openChooser=$('#openChooser'), chooser=$('#chooser'), closeChooser=$('#closeChooser'), grid=$('#grid');
+const leaderboard=$('#leaderboard'), leaderboardBody=$('#leaderboardBody');
+const leaderboardList=$('#leaderboardList');
+const toggleLeaderboardBtn=$('#toggleLeaderboard');
+const playerNameInput=$('#playerName');
+const saveScoreBtn=$('#saveScore');
+
+const LEADERBOARD_KEY = 'anatomyQuizLeaderboard';
+const PLAYER_NAME_KEY = 'anatomyQuizPlayerName';
+const MAX_LEADERBOARD_ENTRIES = 10;
 
 /* ===== STATE ===== */
-const State = { bank: [], index: 0, score: 0, startedAt: 0 };
+const State = { bank: [], index: 0, score: 0, startedAt: 0, leaderboard: [], lastResult: null, playerName: '' };
+
+function loadLeaderboard(){
+  let entries = [];
+  try{
+    const raw = window.localStorage?.getItem(LEADERBOARD_KEY);
+    if(raw){
+      const parsed = JSON.parse(raw);
+      if(Array.isArray(parsed)) entries = parsed.filter(isValidLeaderboardEntry);
+    }
+  }catch(err){ entries = []; }
+  State.leaderboard = entries.map(e=>({
+    name: String(e.name || 'Player'),
+    score: Number(e.score),
+    total: Number(e.total),
+    accuracy: Number(e.accuracy),
+    timestamp: Number(e.timestamp)
+  }));
+  sortLeaderboard();
+
+  try{
+    const storedName = window.localStorage?.getItem(PLAYER_NAME_KEY);
+    if(storedName){ State.playerName = storedName; if(playerNameInput && !playerNameInput.value) playerNameInput.value = storedName; }
+  }catch(err){ /* ignore */ }
+
+  renderLeaderboard();
+  updateSaveButton();
+  syncLeaderboardToggle();
+}
+
+function saveLeaderboard(){
+  try{ window.localStorage?.setItem(LEADERBOARD_KEY, JSON.stringify(State.leaderboard)); }
+  catch(err){ /* ignore */ }
+}
+
+function rememberPlayerName(name){
+  State.playerName = name;
+  if(playerNameInput && playerNameInput.value !== name) playerNameInput.value = name;
+  try{ window.localStorage?.setItem(PLAYER_NAME_KEY, name); }
+  catch(err){ /* ignore */ }
+}
+
+function isValidLeaderboardEntry(entry){
+  return entry && typeof entry === 'object' && Number.isFinite(entry.score) && Number.isFinite(entry.total) && Number.isFinite(entry.accuracy) && Number.isFinite(entry.timestamp);
+}
+
+function renderLeaderboard(){
+  if(!leaderboardList) return;
+  leaderboardList.innerHTML = '';
+  if(!State.leaderboard.length){
+    const li = document.createElement('li');
+    li.className = 'muted';
+    li.textContent = 'No scores saved yet.';
+    leaderboardList.appendChild(li);
+    return;
+  }
+
+  State.leaderboard.forEach((entry, idx)=>{
+    const li = document.createElement('li');
+    li.className = 'leaderboardItem';
+
+    const details = document.createElement('div');
+    details.className = 'leaderboardDetails';
+
+    const stats = document.createElement('span');
+    stats.className = 'leaderboardStats';
+    const strong = document.createElement('strong');
+    strong.textContent = `${idx+1}.`;
+    stats.appendChild(strong);
+    stats.appendChild(document.createTextNode(` ${entry.name || 'Player'}`));
+
+    const meta = document.createElement('span');
+    meta.className = 'leaderboardMeta';
+    meta.textContent = formatLeaderboardTimestamp(entry.timestamp);
+
+    details.appendChild(stats);
+    details.appendChild(meta);
+
+    const score = document.createElement('span');
+    score.textContent = `${entry.score}/${entry.total} · ${entry.accuracy}%`;
+
+    li.appendChild(details);
+    li.appendChild(score);
+    leaderboardList.appendChild(li);
+  });
+}
+
+function formatLeaderboardTimestamp(ts){
+  try{
+    return new Date(ts).toLocaleString();
+  }catch(err){
+    return '';
+  }
+}
+
+function getCurrentPlayerName(){
+  const raw = playerNameInput ? playerNameInput.value : State.playerName;
+  const name = String(raw || State.playerName || '').trim() || 'Player';
+  rememberPlayerName(name);
+  return name;
+}
+
+function persistCurrentResult(nameOverride){
+  if(!State.lastResult) return;
+  let name;
+  if(nameOverride !== undefined){
+    name = String(nameOverride || '').trim() || 'Player';
+    rememberPlayerName(name);
+  } else {
+    name = getCurrentPlayerName();
+  }
+  const entry = { ...State.lastResult, name };
+  const existingIdx = State.leaderboard.findIndex(item => item.timestamp === entry.timestamp);
+  if(existingIdx >= 0) State.leaderboard[existingIdx] = entry;
+  else State.leaderboard.push(entry);
+  sortLeaderboard();
+  saveLeaderboard();
+  renderLeaderboard();
+  updateSaveButton();
+}
+
+function sortLeaderboard(){
+  State.leaderboard.sort((a,b)=>{
+    if(b.score !== a.score) return b.score - a.score;
+    if(b.accuracy !== a.accuracy) return b.accuracy - a.accuracy;
+    return b.timestamp - a.timestamp;
+  });
+  if(State.leaderboard.length > MAX_LEADERBOARD_ENTRIES){
+    State.leaderboard.length = MAX_LEADERBOARD_ENTRIES;
+  }
+}
+
+function updateSaveButton(){ if(saveScoreBtn) saveScoreBtn.disabled = !State.lastResult; }
+
+loadLeaderboard();
+
+function syncLeaderboardToggle(){
+  if(!leaderboard || !leaderboardBody || !toggleLeaderboardBtn) return;
+  const collapsed = leaderboard.classList.contains('collapsed');
+  if(collapsed){
+    leaderboardBody.setAttribute('hidden','');
+    toggleLeaderboardBtn.textContent = 'Show Leaderboard';
+  }else{
+    leaderboardBody.removeAttribute('hidden');
+    toggleLeaderboardBtn.textContent = 'Hide Leaderboard';
+  }
+}
+
+function toggleLeaderboard(){
+  if(!leaderboard) return;
+  leaderboard.classList.toggle('collapsed');
+  syncLeaderboardToggle();
+}
 
 /* ===== STARTUP ===== */
 (async function boot(){
@@ -321,8 +515,29 @@ function hideExp(){ exp.style.display='none'; expText.textContent=''; }
 /* ===== NAV ===== */
 function next(){ if(State.index < State.bank.length-1){ State.index++; render(); } else { finish(); } }
 function prev(){ if(State.index>0){ State.index--; render(); } }
-function restart(){ State.bank = State.bank.map(q=>({ ...q, evaluated:false, userChoice:null })); State.index=0; State.score=0; show(quiz); render(); }
-function finish(){ show(done); const total = State.bank.length; const acc = total? Math.round((State.score/total)*100):0; $('#finalScore').textContent = `You scored ${State.score}/${total}`; $('#finalMeta').textContent = `Accuracy ${acc}%`; }
+function restart(){
+  State.bank = State.bank.map(q=>({ ...q, evaluated:false, userChoice:null }));
+  State.index=0;
+  State.score=0;
+  State.lastResult = null;
+  updateSaveButton();
+  syncLeaderboardToggle();
+  show(quiz);
+  render();
+}
+function finish(){
+  show(done);
+  const total = State.bank.length;
+  const acc = total? Math.round((State.score/total)*100):0;
+  if(finalScoreEl) finalScoreEl.textContent = `You scored ${State.score}/${total}`;
+  if(finalMetaEl) finalMetaEl.textContent = `Accuracy ${acc}%`;
+
+  if(playerNameInput && !playerNameInput.value && State.playerName){ playerNameInput.value = State.playerName; }
+
+  State.lastResult = { score: State.score, total, accuracy: acc, timestamp: Date.now() };
+  persistCurrentResult();
+  if(playerNameInput && !(leaderboard && leaderboard.classList.contains('collapsed'))) playerNameInput.focus();
+}
 
 /* ===== UTIL ===== */
 function show(el){ [intro,quiz,done].forEach(s=>s.classList.remove('active')); el.classList.add('active'); }
@@ -333,6 +548,11 @@ nextBtn.addEventListener('click', next);
 prevBtn.addEventListener('click', prev);
 restartBtn.addEventListener('click', restart);
 restart2?.addEventListener('click', restart);
+toggleLeaderboardBtn?.addEventListener('click', toggleLeaderboard);
+saveScoreBtn?.addEventListener('click', ()=>{ if(State.lastResult){ persistCurrentResult(); }});
+playerNameInput?.addEventListener('input', ()=>{ State.playerName = playerNameInput.value; });
+playerNameInput?.addEventListener('blur', ()=>{ const name = getCurrentPlayerName(); if(State.lastResult){ persistCurrentResult(name); } });
+playerNameInput?.addEventListener('keydown', (e)=>{ if(e.key==='Enter'){ e.preventDefault(); saveScoreBtn?.click(); } });
 
 /* Keyboard */
 window.addEventListener('keydown', (e)=>{
