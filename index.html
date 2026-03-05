@@ -1,351 +1,446 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<title>Quiz — Gen Z Mobile</title>
-<!-- Gen‑Z variable fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Outfit:wght@300..700&family=Manrope:wght@300..800&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#0b1020; --card:#0f172a; --ink:#e5e7eb; --muted:#93a4ba; --line:#1f2a44;
-    --brand:#7c3aed; --brand2:#22d3ee; --ok:#10b981; --bad:#ef4444;
-    --opt:#0b1326; --opt-hover:#111c34; --ring:0 0 0 3px rgba(124,58,237,.25);
-    --font-sans:"Space Grotesk","Outfit","Manrope",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
-  }
-  @media (prefers-color-scheme: light){
-    :root{ --bg:#f7f9fc; --card:#fff; --ink:#0f172a; --muted:#64748b; --line:#e2e8f0; --opt:#f8fafc; --opt-hover:#eff6ff; }
-  }
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg)}
-  .safe{padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Campus Compass Focus Hub</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: rgba(15, 23, 42, 0.72);
+      --panel-solid: #111827;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --accent: #38bdf8;
+      --accent-2: #a78bfa;
+      --success: #22c55e;
+      --danger: #f43f5e;
+      --border: rgba(148, 163, 184, 0.25);
+    }
 
-  /* Header */
-  header{position:sticky;top:0;z-index:40;backdrop-filter:blur(10px) saturate(160%);
-    background:linear-gradient(90deg,rgba(124,58,237,.20),rgba(34,211,238,.15));
-    border-bottom:1px solid var(--line)}
-  .head{max-width:920px;margin:0 auto;padding:12px;display:flex;align-items:center;justify-content:space-between;gap:10px}
-  h1{margin:0;font-size:18px;font-weight:900;letter-spacing:.2px}
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color: var(--text);
+      background: radial-gradient(circle at 20% 20%, #1d4ed8 0, transparent 40%),
+                  radial-gradient(circle at 80% 10%, #7c3aed 0, transparent 35%),
+                  var(--bg);
+      transition: background 0.4s ease;
+    }
 
-  /* Layout */
-  main{max-width:920px;margin:14px auto 110px;padding:0 14px}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:0 10px 30px rgba(2,12,27,.25)}
-  .screen{display:none}.screen.active{display:block}
+    .app {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: 2fr 1fr;
+    }
 
-  /* Meta / progress */
-  .meta{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;margin-bottom:10px}
-  .metaRow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-  .badge{font-size:12px;padding:6px 8px;border-radius:10px;border:1px solid var(--line);color:var(--muted);background:rgba(255,255,255,.02);cursor:pointer}
-  .progress{height:10px;background:#13203a;border-radius:999px;overflow:hidden}
-  @media (prefers-color-scheme: light){.progress{background:#e6edf7}}
-  .bar{height:100%;width:0;background:linear-gradient(90deg,var(--brand),#3b82f6 50%,var(--brand2))}
-  .pct{font-size:12px;color:var(--muted);text-align:right}
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      backdrop-filter: blur(12px);
+      padding: 1rem;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+    }
 
-  /* Compact chooser button */
-  .mini{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.04);cursor:pointer}
-  .mini:active{transform:scale(.98)}
+    h1, h2, h3 { margin: 0 0 0.5rem; }
+    p { margin: 0; color: var(--muted); }
 
-  /* Question / options */
-  .q{font-size:20px;font-weight:900;margin:6px 0}
-  .options{display:grid;gap:10px;margin:12px 0}
-  @media (min-width:640px){.options{grid-template-columns:1fr 1fr}}
-  .opt{background:var(--opt);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;gap:12px;align-items:flex-start;cursor:pointer;transition:background .12s,transform .04s,box-shadow .12s}
-  .opt:hover{background:var(--opt-hover)}
-  .opt:active{transform:scale(.996)}
-  .opt.disabled{opacity:.96;pointer-events:none}
-  .key{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-weight:900;background:#1f2a44;color:#e5e7eb;flex:0 0 30px}
-  @media (prefers-color-scheme: light){.key{background:#e2e8f0;color:#111827}}
-  .opt.correct{background:rgba(16,185,129,.12);border-color:#34d399}
-  .opt.wrong{background:rgba(239,68,68,.12);border-color:#fca5a5}
-  .opt.correct .key{background:#34d399}
-  .opt.wrong .key{background:#f87171}
+    .header {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
 
-  .exp{display:none;margin-top:10px;border:1px dashed var(--line);border-radius:14px;padding:12px;background:rgba(255,255,255,.03)}
+    .theme-buttons, .controls, .sound-grid, .timer-modes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
 
-  /* Controls */
-  .controls{position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(11,16,32,.88);border-top:1px solid var(--line);backdrop-filter:blur(12px)}
-  @media (prefers-color-scheme: light){.controls{background:rgba(255,255,255,.92)}}
-  .controls .inner{max-width:920px;margin:0 auto;padding:10px;display:flex;justify-content:space-between;gap:10px}
-  button{font:inherit;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
-  .primary{background:linear-gradient(90deg,var(--brand),var(--brand2));color:#fff;font-weight:800}
-  .ghost{background:transparent}
+    button, input, textarea, select {
+      font: inherit;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      color: var(--text);
+      background: rgba(15, 23, 42, 0.7);
+      padding: 0.55rem 0.8rem;
+    }
 
-  .error{display:none;margin:8px 0 0;padding:10px;border-radius:10px;background:rgba(239,68,68,.12);border:1px solid #fca5a5;color:#fecaca;font-size:14px}
-  .muted{color:var(--muted);font-size:14px}
+    button { cursor: pointer; }
+    button.active {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+    }
 
-  /* Modal chooser */
-  .overlay{position:fixed;inset:0;background:rgba(2,12,27,.5);backdrop-filter:blur(4px);display:none;z-index:70}
-  .overlay.show{display:block}
-  .modal{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(92vw,520px);max-height:min(80vh,640px);background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,.35);display:flex;flex-direction:column}
-  .modalHeader{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-bottom:1px solid var(--line)}
-  .modalTitle{font-weight:900}
-  .grid{padding:12px;display:grid;grid-template-columns:repeat(6,1fr);gap:8px;overflow:auto}
-  @media (min-width:520px){.grid{grid-template-columns:repeat(8,1fr)}}
-  .qbtn{height:38px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:13px;cursor:pointer}
-  .qbtn.attempted{background:var(--brand);color:#fff}
-  .qbtn.current{outline:2px solid var(--brand2)}
-</style>
+    .timer {
+      text-align: center;
+    }
+
+    .timer-value {
+      font-size: clamp(2.4rem, 8vw, 5rem);
+      font-weight: 700;
+      margin: 0.8rem 0;
+      letter-spacing: 0.05em;
+    }
+
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-top: 0.8rem; }
+    .stat { background: rgba(2,6,23,0.45); border: 1px solid var(--border); border-radius: 10px; padding: 0.6rem; text-align:center; }
+    .stat strong { display:block; font-size: 1.1rem; color: var(--accent); }
+
+    .todo-list, .habit-list { list-style: none; padding: 0; margin: 0.7rem 0 0; display: grid; gap: 0.5rem; }
+    .todo-item, .habit-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      background: rgba(2,6,23,0.45);
+      padding: 0.55rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .todo-item.done span { text-decoration: line-through; color: var(--muted); }
+    .icon-btn { padding: 0.3rem 0.55rem; }
+
+    .notes { min-height: 180px; width: 100%; resize: vertical; }
+
+    .quote { font-style: italic; margin-top: 0.7rem; }
+
+    .sound-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.4rem;
+      align-items: center;
+      margin-bottom: 0.4rem;
+    }
+
+    .footer { grid-column: 1 / -1; text-align: center; color: var(--muted); font-size: 0.9rem; }
+
+    @media (max-width: 900px) {
+      .app { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <div class="head safe">
-      <h1>Anatomy Quiz</h1>
-    </div>
-  </header>
-
-  <main>
-    <!-- Intro / loader with fallback file picker (only shows if needed) -->
-    <section id="intro" class="card screen active" aria-live="polite">
-      <div style="font-weight:900;margin-bottom:6px">Loading questions…</div>
-      <div class="muted">Expected file: <code>quiz_questions_from_pdf.json</code> next to this HTML. If you're opening via <code>file://</code> or the fetch fails, use the button below.</div>
-      <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
-        <button id="pickBtn" class="ghost">Select questions JSON</button>
-        <input id="fileInput" type="file" accept="application/json" style="display:none" />
+  <main class="app">
+    <section class="panel header">
+      <div>
+        <h1>Focus Hub</h1>
+        <p>Study timer, ambient audio, tasks, notes, habits, and motivation in one app.</p>
       </div>
-      <div id="introErr" class="error"></div>
-    </section>
-
-    <!-- Quiz screen -->
-    <section id="quiz" class="card screen" aria-labelledby="qLabel">
-      <div class="meta">
-        <div class="metaRow">
-          <span id="metaIdx" class="badge" title="Tap to jump">Q 1/1</span>
-          <span id="metaScore" class="badge">Score 0</span>
-        </div>
-        <div class="progress" aria-hidden="true"><div id="bar" class="bar"></div></div>
-        <button id="openChooser" class="mini" title="Choose question" aria-label="Choose question">#</button>
-      </div>
-      <div class="pct" id="pct" style="margin:-6px 0 8px">0%</div>
-
-      <h2 id="qLabel" class="q">—</h2>
-      <div id="optBox" class="options" role="group" aria-label="Options"></div>
-      <div id="exp" class="exp" aria-live="polite" aria-atomic="true"><strong>Explanation</strong><div id="expText" class="muted" style="margin-top:6px"></div></div>
-      <div id="quizErr" class="error"></div>
-    </section>
-
-    <!-- Final score -->
-    <section id="done" class="card screen">
-      <div style="text-align:center;padding:16px">
-        <div id="finalScore" style="font-size:28px;font-weight:900">—</div>
-        <div id="finalMeta" class="muted"></div>
-        <div style="margin-top:12px"><button id="restart2" class="primary">Restart</button></div>
+      <div class="theme-buttons">
+        <button data-theme="deep" class="theme-btn active">Deep Space</button>
+        <button data-theme="forest" class="theme-btn">Forest</button>
+        <button data-theme="sunset" class="theme-btn">Sunset</button>
       </div>
     </section>
+
+    <section class="panel timer">
+      <h2>Pomodoro Timer</h2>
+      <div class="timer-modes">
+        <button data-mode="focus" class="mode-btn active">Focus (25)</button>
+        <button data-mode="short">Short Break (5)</button>
+        <button data-mode="long">Long Break (15)</button>
+      </div>
+      <div id="timerValue" class="timer-value">25:00</div>
+      <div class="controls">
+        <button id="startPauseBtn">Start</button>
+        <button id="resetBtn">Reset</button>
+      </div>
+      <div class="stats">
+        <div class="stat"><span>Sessions</span><strong id="sessionCount">0</strong></div>
+        <div class="stat"><span>Focus mins</span><strong id="focusMinutes">0</strong></div>
+        <div class="stat"><span>Streak</span><strong id="streak">0</strong></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Ambient Sounds</h2>
+      <p>Mix sounds and tune volume for deep focus.</p>
+      <div class="sound-grid" id="soundGrid"></div>
+    </section>
+
+    <section class="panel">
+      <h2>To-do Planner</h2>
+      <div class="controls">
+        <input id="todoInput" type="text" placeholder="Add a task" />
+        <button id="addTodoBtn">Add</button>
+      </div>
+      <ul id="todoList" class="todo-list"></ul>
+    </section>
+
+    <section class="panel">
+      <h2>Daily Habits</h2>
+      <div class="controls">
+        <input id="habitInput" type="text" placeholder="Add a habit" />
+        <button id="addHabitBtn">Add</button>
+      </div>
+      <ul id="habitList" class="habit-list"></ul>
+    </section>
+
+    <section class="panel">
+      <h2>Notes</h2>
+      <textarea id="notes" class="notes" placeholder="Write your study notes or quick thoughts..."></textarea>
+    </section>
+
+    <section class="panel">
+      <h2>Motivation</h2>
+      <button id="newQuoteBtn">New Quote</button>
+      <p id="quoteText" class="quote"></p>
+    </section>
+
+    <section class="footer">Built as a Flocus-style productivity dashboard clone for Campus Compass.</section>
   </main>
 
-  <nav class="controls" aria-label="Navigation">
-    <div class="inner safe">
-      <button id="prevBtn" class="ghost" aria-label="Previous question">◀ Prev</button>
-      <div style="display:flex;gap:8px">
-        <button id="restartBtn" class="ghost" aria-label="Restart quiz">Restart</button>
-        <button id="nextBtn" class="primary" disabled aria-label="Next question">Next ▶</button>
-      </div>
-    </div>
-  </nav>
+  <script>
+    const STORAGE_KEY = 'focusHubDataV1';
+    const defaultState = {
+      mode: 'focus',
+      remaining: 25 * 60,
+      isRunning: false,
+      sessions: 0,
+      focusMinutes: 0,
+      streak: 0,
+      lastSessionDate: null,
+      todos: [],
+      habits: [],
+      notes: '',
+      theme: 'deep',
+      soundLevels: { rain: 0, waves: 0, cafe: 0 },
+      quoteIndex: 0
+    };
 
-  <!-- Hidden modal chooser -->
-  <div id="chooser" class="overlay" role="dialog" aria-modal="true" aria-labelledby="chooserTitle">
-    <div class="modal">
-      <div class="modalHeader">
-        <div id="chooserTitle" class="modalTitle">Choose Question</div>
-        <button id="closeChooser" class="mini" aria-label="Close">✕</button>
-      </div>
-      <div id="grid" class="grid" role="listbox" aria-label="Question list"></div>
-    </div>
-  </div>
+    let state = loadState();
+    let timerId = null;
+    const modeDurations = { focus: 25 * 60, short: 5 * 60, long: 15 * 60 };
 
-<script>
-'use strict';
-/* ===== CONFIG ===== */
-const QUESTIONS_URL = 'quiz_questions_from_pdf.json';
+    const quotes = [
+      'Discipline is choosing between what you want now and what you want most.',
+      'Tiny daily improvements over time lead to stunning results.',
+      'Focus on being productive instead of busy.',
+      'Success is the sum of small efforts repeated day in and day out.',
+      'One deep work session can change your entire day.'
+    ];
 
-/* ===== DOM ===== */
-const $ = (s)=>document.querySelector(s);
-const intro=$('#intro'), quiz=$('#quiz'), done=$('#done');
-const introErr=$('#introErr'), quizErr=$('#quizErr');
-const pickBtn=$('#pickBtn'), fileInput=$('#fileInput');
-const metaIdx=$('#metaIdx'), metaScore=$('#metaScore');
-const bar=$('#bar'), pct=$('#pct');
-const qLabel=$('#qLabel'), optBox=$('#optBox');
-const exp=$('#exp'), expText=$('#expText');
-const prevBtn=$('#prevBtn'), nextBtn=$('#nextBtn'), restartBtn=$('#restartBtn'), restart2=document.getElementById('restart2');
-const openChooser=$('#openChooser'), chooser=$('#chooser'), closeChooser=$('#closeChooser'), grid=$('#grid');
+    const themeMap = {
+      deep: 'radial-gradient(circle at 20% 20%, #1d4ed8 0, transparent 40%), radial-gradient(circle at 80% 10%, #7c3aed 0, transparent 35%), #0f172a',
+      forest: 'radial-gradient(circle at 10% 10%, #166534 0, transparent 35%), radial-gradient(circle at 80% 20%, #15803d 0, transparent 35%), #052e16',
+      sunset: 'radial-gradient(circle at 20% 20%, #ea580c 0, transparent 35%), radial-gradient(circle at 75% 15%, #db2777 0, transparent 40%), #312e81'
+    };
 
-/* ===== STATE ===== */
-const State = { bank: [], index: 0, score: 0, startedAt: 0 };
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const sounds = {
+      rain: createNoise('bandpass', 900),
+      waves: createNoise('lowpass', 450),
+      cafe: createNoise('highpass', 1200)
+    };
 
-/* ===== STARTUP ===== */
-(async function boot(){
-  const isFile = location.protocol === 'file:';
-  if(!isFile){
-    try{ await loadFromUrl(QUESTIONS_URL); show(quiz); render(); return; }
-    catch(e){ show(intro); introErr.style.display='block'; introErr.textContent = 'Auto-load failed: '+ (e.message||e); }
-  }
-  show(intro);
-})();
+    function loadState() {
+      try {
+        const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY));
+        return parsed ? { ...defaultState, ...parsed } : { ...defaultState };
+      } catch {
+        return { ...defaultState };
+      }
+    }
 
-/* ===== LOADERS ===== */
-async function loadFromUrl(url){
-  const res = await fetch(url, { cache:'no-store' });
-  if(!res.ok) throw new Error(`${res.status} ${res.statusText}`);
-  const raw = await res.json();
-  State.bank = raw.map(normalize);
-  State.startedAt = Date.now();
-}
-function loadFromObject(obj){
-  State.bank = obj.map(normalize);
-  State.startedAt = Date.now();
-}
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
 
-/* File picker fallback */
-if(pickBtn && fileInput){
-  pickBtn.addEventListener('click', ()=> fileInput.click());
-  fileInput.addEventListener('change', async (e)=>{
-    const f = e.target.files && e.target.files[0];
-    if(!f) return;
-    try{
-      const text = await f.text();
-      const data = JSON.parse(text);
-      loadFromObject(data);
-      show(quiz); render();
-    }catch(err){ introErr.style.display='block'; introErr.textContent = 'Invalid JSON: ' + (err.message||String(err)); }
-  });
-}
+    function createNoise(filterType, frequency) {
+      const bufferSize = 2 * audioCtx.sampleRate;
+      const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+      const output = noiseBuffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) output[i] = Math.random() * 2 - 1;
 
-/* ===== NORMALIZE ===== */
-function normalize(x, idx){
-  const letters = ['A','B','C','D','E','F','G','H'];
-  const q = String(x.question ?? '').trim();
-  let options = [];
-  if(Array.isArray(x.options)){
-    options = x.options.map((t,n)=>({ key: letters[n]||String.fromCharCode(65+n), text: String(t??'').trim() }));
-  } else if (x.options && typeof x.options === 'object'){
-    options = letters.filter(k => x.options[k] != null).map(k => ({ key:k, text:String(x.options[k]).trim() }));
-  } else {
-    options = letters.filter(k => x[k] != null).map(k => ({ key:k, text:String(x[k]).trim() }));
-  }
-  let answerKey = String(x.answerKey ?? x.answer ?? '').trim().toUpperCase();
-  if(!answerKey && Number.isInteger(x.answerIndex)){
-    const k = letters[x.answerIndex]; if(k) answerKey = k;
-  }
-  const explanation = String(x.explanation ?? '').trim();
-  return { id: x.id ?? idx+1, question:q, options, answerKey, explanation, evaluated:false, userChoice:null };
-}
+      const source = audioCtx.createBufferSource();
+      source.buffer = noiseBuffer;
+      source.loop = true;
 
-/* ===== RENDER ===== */
-function render(){
-  const total = State.bank.length; if(!total){ return; }
-  const i = State.index; const q = State.bank[i];
+      const filter = audioCtx.createBiquadFilter();
+      filter.type = filterType;
+      filter.frequency.value = frequency;
 
-  // meta + progress
-  metaIdx.textContent = `Q ${i+1}/${total}`;
-  metaScore.textContent = `Score ${State.score}`;
-  const progress = Math.round((i/Math.max(1,total))*100);
-  bar.style.width = progress + '%';
-  pct.textContent = progress + '%';
+      const gain = audioCtx.createGain();
+      gain.gain.value = 0;
 
-  // question text
-  qLabel.textContent = q.question || '—';
+      source.connect(filter).connect(gain).connect(audioCtx.destination);
+      source.start();
+      return { gain };
+    }
 
-  // options
-  optBox.innerHTML = '';
-  if(!q.options || !q.options.length){ quizErr.style.display='block'; quizErr.textContent='No options found for this item.'; }
-  else { quizErr.style.display='none'; }
-  q.options.forEach(o=>{
-    const btn = document.createElement('button');
-    btn.className = 'opt'; btn.dataset.key = o.key;
-    btn.innerHTML = `<span class="key">${o.key}</span><div>${escapeHTML(o.text)}</div>`;
-    btn.addEventListener('click', ()=> choose(o.key));
-    optBox.appendChild(btn);
-  });
+    function setTheme(theme) {
+      document.body.style.background = themeMap[theme];
+      state.theme = theme;
+      document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.theme === theme));
+      saveState();
+    }
 
-  if(q.evaluated){ decorate(q); showExp(q); setDisabled(true); nextBtn.disabled = false; }
-  else { hideExp(); setDisabled(false); nextBtn.disabled = true; }
+    function setMode(mode) {
+      state.mode = mode;
+      state.remaining = modeDurations[mode];
+      state.isRunning = false;
+      clearInterval(timerId);
+      timerId = null;
+      document.getElementById('startPauseBtn').textContent = 'Start';
+      document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.mode === mode));
+      renderTimer();
+      saveState();
+    }
 
-  prevBtn.disabled = (i===0);
+    function renderTimer() {
+      const min = String(Math.floor(state.remaining / 60)).padStart(2, '0');
+      const sec = String(state.remaining % 60).padStart(2, '0');
+      document.getElementById('timerValue').textContent = `${min}:${sec}`;
+      document.getElementById('sessionCount').textContent = state.sessions;
+      document.getElementById('focusMinutes').textContent = state.focusMinutes;
+      document.getElementById('streak').textContent = state.streak;
+    }
 
-  // Rebuild modal grid lazily to reflect attempt states
-  buildGrid();
-}
+    function completeSession() {
+      if (state.mode === 'focus') {
+        state.sessions += 1;
+        state.focusMinutes += 25;
+        const today = new Date().toDateString();
+        if (state.lastSessionDate && state.lastSessionDate !== today) state.streak += 1;
+        if (!state.lastSessionDate) state.streak = 1;
+        state.lastSessionDate = today;
+      }
+      alert('Session complete!');
+      setMode(state.mode === 'focus' ? 'short' : 'focus');
+      saveState();
+    }
 
-/* ===== Modal grid ===== */
-function buildGrid(){
-  grid.innerHTML = '';
-  State.bank.forEach((q, idx)=>{
-    const b = document.createElement('button');
-    b.className = 'qbtn'; b.textContent = idx+1; b.setAttribute('role','option');
-    if(q.evaluated) b.classList.add('attempted');
-    if(idx===State.index) b.classList.add('current');
-    b.addEventListener('click', ()=>{ State.index = idx; render(); hideChooser(); });
-    grid.appendChild(b);
-  });
-}
-function showChooser(){ chooser.classList.add('show'); }
-function hideChooser(){ chooser.classList.remove('show'); }
-openChooser.addEventListener('click', showChooser);
-closeChooser.addEventListener('click', hideChooser);
-chooser.addEventListener('click', (e)=>{ if(e.target===chooser) hideChooser(); });
+    function toggleTimer() {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      state.isRunning = !state.isRunning;
+      document.getElementById('startPauseBtn').textContent = state.isRunning ? 'Pause' : 'Start';
+      if (state.isRunning) {
+        timerId = setInterval(() => {
+          state.remaining -= 1;
+          if (state.remaining <= 0) {
+            clearInterval(timerId);
+            timerId = null;
+            state.remaining = 0;
+            state.isRunning = false;
+            document.getElementById('startPauseBtn').textContent = 'Start';
+            completeSession();
+          }
+          renderTimer();
+          saveState();
+        }, 1000);
+      } else {
+        clearInterval(timerId);
+        timerId = null;
+      }
+      saveState();
+    }
 
-/* Clicking the "Q 1/182" badge still supports jump via prompt */
-metaIdx.addEventListener('click', ()=>{
-  const total = State.bank.length;
-  const val = prompt(`Go to question (1–${total})`);
-  if(!val) return;
-  const n = Math.max(1, Math.min(total, parseInt(val,10)||1));
-  State.index = n-1; render();
-});
+    function renderList(type, elId) {
+      const list = document.getElementById(elId);
+      list.innerHTML = '';
+      state[type].forEach((item, index) => {
+        const li = document.createElement('li');
+        li.className = `${type === 'todos' ? 'todo-item' : 'habit-item'} ${item.done ? 'done' : ''}`;
+        li.innerHTML = `<span>${item.text}</span>
+          <div>
+            <button class="icon-btn" data-action="toggle" data-type="${type}" data-index="${index}">${item.done ? '↺' : '✓'}</button>
+            <button class="icon-btn" data-action="delete" data-type="${type}" data-index="${index}">✕</button>
+          </div>`;
+        list.appendChild(li);
+      });
+    }
 
-/* ===== ANSWER FLOW ===== */
-function choose(key){
-  const q = State.bank[State.index]; if(q.evaluated) return;
-  q.userChoice = String(key||'').toUpperCase(); q.evaluated = true;
-  if(q.userChoice === q.answerKey) State.score++;
-  decorate(q); showExp(q); setDisabled(true); nextBtn.disabled = false;
-  exp.scrollIntoView({behavior:'smooth', block:'nearest'});
-}
+    function addItem(type, value) {
+      if (!value.trim()) return;
+      state[type].push({ text: value.trim(), done: false });
+      saveState();
+      renderList('todos', 'todoList');
+      renderList('habits', 'habitList');
+    }
 
-function decorate(q){
-  optBox.querySelectorAll('.opt').forEach(b=>{
-    const k = (b.dataset.key||'').toUpperCase();
-    if(k === q.answerKey) b.classList.add('correct');
-    if(k === q.userChoice && q.userChoice !== q.answerKey) b.classList.add('wrong');
-  });
-}
-function setDisabled(state){ optBox.querySelectorAll('.opt').forEach(b=>{ b.disabled=!!state; b.classList.toggle('disabled', !!state); }); }
-function showExp(q){ if(q.explanation){ exp.style.display='block'; expText.textContent = q.explanation; } else { hideExp(); } }
-function hideExp(){ exp.style.display='none'; expText.textContent=''; }
+    function buildSounds() {
+      const grid = document.getElementById('soundGrid');
+      ['rain', 'waves', 'cafe'].forEach(name => {
+        const wrap = document.createElement('div');
+        wrap.className = 'sound-item';
+        wrap.innerHTML = `<label for="${name}">${name[0].toUpperCase() + name.slice(1)}</label>
+                          <input id="${name}" type="range" min="0" max="100" value="${state.soundLevels[name]}"/>`;
+        grid.appendChild(wrap);
+        wrap.querySelector('input').addEventListener('input', (e) => {
+          const value = Number(e.target.value);
+          state.soundLevels[name] = value;
+          sounds[name].gain.gain.value = value / 100 * 0.25;
+          saveState();
+        });
+        sounds[name].gain.gain.value = state.soundLevels[name] / 100 * 0.25;
+      });
+    }
 
-/* ===== NAV ===== */
-function next(){ if(State.index < State.bank.length-1){ State.index++; render(); } else { finish(); } }
-function prev(){ if(State.index>0){ State.index--; render(); } }
-function restart(){ State.bank = State.bank.map(q=>({ ...q, evaluated:false, userChoice:null })); State.index=0; State.score=0; show(quiz); render(); }
-function finish(){ show(done); const total = State.bank.length; const acc = total? Math.round((State.score/total)*100):0; $('#finalScore').textContent = `You scored ${State.score}/${total}`; $('#finalMeta').textContent = `Accuracy ${acc}%`; }
+    function renderQuote() {
+      document.getElementById('quoteText').textContent = quotes[state.quoteIndex % quotes.length];
+    }
 
-/* ===== UTIL ===== */
-function show(el){ [intro,quiz,done].forEach(s=>s.classList.remove('active')); el.classList.add('active'); }
-function escapeHTML(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+    document.body.addEventListener('click', (e) => {
+      const button = e.target.closest('button');
+      if (!button) return;
 
-/* Buttons */
-nextBtn.addEventListener('click', next);
-prevBtn.addEventListener('click', prev);
-restartBtn.addEventListener('click', restart);
-restart2?.addEventListener('click', restart);
+      if (button.dataset.action) {
+        const { action, type, index } = button.dataset;
+        if (action === 'toggle') state[type][index].done = !state[type][index].done;
+        if (action === 'delete') state[type].splice(index, 1);
+        saveState();
+        renderList('todos', 'todoList');
+        renderList('habits', 'habitList');
+      }
+    });
 
-/* Keyboard */
-window.addEventListener('keydown', (e)=>{
-  if(!quiz.classList.contains('active')) return;
-  const q = State.bank[State.index];
-  const k = e.key.toUpperCase();
-  const letters = ['A','B','C','D','E','F','G','H'];
-  if(letters.includes(k) && !q?.evaluated){
-    const btn = Array.from(optBox.querySelectorAll('.opt')).find(b => (b.dataset.key||'').toUpperCase()===k);
-    if(btn) btn.click();
-  } else if((e.key==='Enter'||e.key==='ArrowRight') && q?.evaluated){ next(); }
-  else if(e.key==='ArrowLeft'){ prev(); }
-});
-</script>
+    document.querySelectorAll('.theme-btn').forEach(btn => btn.addEventListener('click', () => setTheme(btn.dataset.theme)));
+    document.querySelectorAll('.mode-btn').forEach(btn => btn.addEventListener('click', () => setMode(btn.dataset.mode)));
+    document.getElementById('startPauseBtn').addEventListener('click', toggleTimer);
+    document.getElementById('resetBtn').addEventListener('click', () => setMode(state.mode));
+
+    document.getElementById('addTodoBtn').addEventListener('click', () => {
+      const input = document.getElementById('todoInput');
+      addItem('todos', input.value);
+      input.value = '';
+    });
+
+    document.getElementById('addHabitBtn').addEventListener('click', () => {
+      const input = document.getElementById('habitInput');
+      addItem('habits', input.value);
+      input.value = '';
+    });
+
+    document.getElementById('notes').addEventListener('input', (e) => {
+      state.notes = e.target.value;
+      saveState();
+    });
+
+    document.getElementById('newQuoteBtn').addEventListener('click', () => {
+      state.quoteIndex = (state.quoteIndex + 1) % quotes.length;
+      saveState();
+      renderQuote();
+    });
+
+    setTheme(state.theme);
+    setMode(state.mode);
+    document.getElementById('notes').value = state.notes;
+    buildSounds();
+    renderList('todos', 'todoList');
+    renderList('habits', 'habitList');
+    renderQuote();
+    renderTimer();
+  </script>
 </body>
 </html>
